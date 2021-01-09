@@ -15,7 +15,7 @@ VALUES
 ('Sennheiser headphones', 'black color, 300 ohms', 'https://i.imgur.com/tNuze0j.jpg', 'https://i.imgur.com/tNuze0t.jpg', 200, 'New', '2008-03-09 15:45:21', NULL, 3, 3),
 ('Barber Chair', 'black color', 'https://i.redd.it/ewkikofclok41.jpg', 'https://i.redd.it/ewkikofclok41.jpg', 100, 'Used', '2008-03-09 15:45:21', NULL, 4, 4),
 ('2004 Pontiac Aztek', 'Green automatic, new windshield!', 'http://pics.imcdb.org/15489/breakingbads05e04720phdtvx264-evolvemkv_000107064.jpg', 'http://pics.imcdb.org/15489/breakingbads05e04720phdtvx264-evolvemkv_000107064.jpg', 50, 'Used', '2005-03-09 15:45:21', NULL, 1, 6),
-('Bagpipes', 'Tartan, only used once to get myself fired.', 'https://www.wdiy.org/sites/wdiy/files/styles/medium/public/201707/pipes.jpg', 'https://www.wdiy.org/sites/wdiy/files/styles/medium/public/201707/pipes.jpg', 250, 'Used', NULL, 5, 7),
+('Bagpipes', 'Tartan, only used once to get myself fired.', 'https://www.wdiy.org/sites/wdiy/files/styles/medium/public/201707/pipes.jpg', 'https://www.wdiy.org/sites/wdiy/files/styles/medium/public/201707/pipes.jpg', 250, 'Used', '2006-03-09 15:45:21', NULL, 5, 7),
 ('Falcon 9 Rocket', 'Launched seven times. Inserted 311 Starlink satellites into orbit.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Bangabandhu_Satellite-1_Mission_(42025499722).jpg/270px-Bangabandhu_Satellite-1_Mission_(42025499722).jpg', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Bangabandhu_Satellite-1_Mission_(42025499722).jpg/270px-Bangabandhu_Satellite-1_Mission_(42025499722).jpg', 90000000, 'Used', '2020-05-05 13:30:21', NULL, 6, 5),
 ('Stage worn costume', 'Worn on tour in Winnipeg, 1984', 'https://i.pinimg.com/736x/2f/16/66/2f1666025c24dbb32a55457cb3e1f80c.jpg', 'https://i.pinimg.com/736x/2f/16/66/2f1666025c24dbb32a55457cb3e1f80c.jpg', 4000, 'Used', '2005-03-09 15:45:21', NULL, 2, 8);
 
@@ -29,4 +29,4 @@ INSERT INTO listing_categories (name) VALUES
 
 INSERT INTO favourite_listings (favourited, created_date, user_id, listing_id) VALUES
 (true, '2008-03-10 15:45:21', 1, 3),
-(true, '2008-05-12 09:45:21', 2, 3);
+(true, '2008-05-12 09:45:21', 3, 2);
