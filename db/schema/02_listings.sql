@@ -12,7 +12,7 @@ CREATE TABLE listings (
   price INTEGER NOT NULL DEFAULT 0,
   condition condition_list,
   posted_date TIMESTAMP NOT NULL,
-  sold_date TIMESTAMP NOT NULL,
+  sold_date TIMESTAMP,
   category_id INTEGER REFERENCES listing_categories(id) ON DELETE CASCADE,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
