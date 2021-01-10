@@ -12,7 +12,7 @@ module.exports = (db) => {
 
   // Get all listings:
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM listings;`)
+    db.query(`SELECT * FROM listings;`)  // This route should be good as-is
       .then(data => {
         const listings = data.rows;
         res.json({ listings });
@@ -27,7 +27,7 @@ module.exports = (db) => {
 
   // Get listings by search term:
   router.get("/listings", (req, res) => {
-    db.query(`SELECT * FROM listings WHERE title LIKE ??????`)  // Fix: ("LIKE" what?, also, what if no such listing is found?)
+    db.query(`SELECT * FROM listings;`)  // Finish: create a query which accepts fuzzy search terms (i.e., LIKE %searchterm%)
       .then(data => {
         const listings = data.rows;
         res.json({ listings });
@@ -41,7 +41,7 @@ module.exports = (db) => {
 
   // Show a single listing:
   router.get("/listings/:id", (req, res) => {
-    db.query(`SELECT * FROM listings WHERE id = ${req.body.id}`)  // Fix: (req.body.id? I guess?)
+    db.query(`SELECT * FROM listings;`)  // Finish: create a query which grabs listings by user ID (i.e., req.body.id)
       .then(data => {
         const listings = data.rows;
         res.json({ listings });
@@ -63,7 +63,7 @@ module.exports = (db) => {
 
   // Post a new listing
   router.post("/listings/", (req, res) => {
-    db.query(`PUT DB QUERY HERE`)                    // Fix: Put DB query here
+    db.query(`SELECT * FROM listings;`)                    // Finish: send new data to database
       .then(
         res.redirect(`/listings/:${req.body.id}`)
       )
@@ -76,7 +76,7 @@ module.exports = (db) => {
 
   // Update an existing listing:
   router.put("/listings/:id", (req, res) => {
-    db.query(`PUT DB QUERY HERE`)                    // Fix: Put DB query here
+    db.query(`SELECT * FROM listings;`)                    // Finish: create a query which locates a listing by ID and updates it with new data
       .then(
         res.redirect(`/listings/:${req.body.id}`)
       )
@@ -89,7 +89,7 @@ module.exports = (db) => {
 
   // Delete a listing:
   router.delete("listings/:id", (req, res) => {
-    db.query(`PUT DB QUERY HERE`)                    // Fix: Put DB query here
+    db.query(`SELECT * FROM listings;`)                    // Finish: create a query which locates a listing by ID and deletes it from the database
       .then(
         res.redirect(`/`)
       )
@@ -102,7 +102,7 @@ module.exports = (db) => {
 
   // Show entire database:
   router.get("/listings/:id", (req, res) => {
-    db.query(`PUT DB QUERY HERE`)                    // Fix: Put DB query here
+    db.query(`SELECT * FROM listings;`)                    // (Temporary DEV-only route): create a query which returns the entire database, all tables
       .then(data => {
         res.json({ data });
       })
