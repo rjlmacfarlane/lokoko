@@ -12,44 +12,55 @@ module.exports = (db) => {
 
   // Get all listings:
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM listings;`)  // This route should be good as-is
+    db.query(`SELECT * FROM listings;`)  // This query should be good as-is
       .then(data => {
-        const listings = data.rows;
-        res.json({ listings });
+        const templateVars = {
+
+
+
+        };
+        res.render('index', templateVars);
       })
       .catch(err => {
         res
           .status(500)
-          .json({ error: err.message });
+          .redirect('error', err.message);
       });
   });
 
-
   // Get listings by search term:
-  router.get("/listings", (req, res) => {
+  router.get("/", (req, res) => {
     db.query(`SELECT * FROM listings;`)  // Finish: create a query which accepts fuzzy search terms (i.e., LIKE %searchterm%)
       .then(data => {
-        const listings = data.rows;
-        res.json({ listings });
+        const templateVars = {
+
+
+
+        };
+        res.render('index', templateVars);
       })
       .catch(err => {
         res
           .status(500)
-          .json({ error: err.message });
+          .redirect('listings', err.message);
       });
   });
 
   // Show a single listing:
-  router.get("/listings/:id", (req, res) => {
-    db.query(`SELECT * FROM listings;`)  // Finish: create a query which grabs listings by user ID (i.e., req.body.id)
+  router.get("/", (req, res) => {
+    db.query(`SELECT * FROM listings;`)       // Finish: create a query which grabs listings by user ID (i.e., req.body.id)
       .then(data => {
-        const listings = data.rows;
-        res.json({ listings });
+        const templateVars = {
+
+
+
+        };
+        res.render('index', templateVars);
       })
       .catch(err => {
         res
           .status(500)
-          .json({ error: err.message });
+          .redirect('listings', err.message);
       });
   });
 
@@ -60,30 +71,39 @@ module.exports = (db) => {
 
   });
 
-
   // Post a new listing
   router.post("/listings/", (req, res) => {
-    db.query(`SELECT * FROM listings;`)                    // Finish: send new data to database
-      .then(
-        res.redirect(`/listings/:${req.body.id}`)
-      )
+    db.query(`SELECT * FROM listings;`)              // Finish: send new data to database
+      .then(data => {
+        const templateVars = {
+
+
+
+        };
+        res.render(`/listings/:${req.body.id}`, templateVars);
+      })
       .catch(err => {
         res
           .status(500)
-          .json({ error: err.message });
+          .redirect('error', err.message);
       });
   });
 
   // Update an existing listing:
   router.put("/listings/:id", (req, res) => {
-    db.query(`SELECT * FROM listings;`)                    // Finish: create a query which locates a listing by ID and updates it with new data
-      .then(
-        res.redirect(`/listings/:${req.body.id}`)
-      )
+    db.query(`SELECT * FROM listings;`)               // Finish: create a query which locates a listing by ID and updates it with new data
+      .then(data => {
+        const templateVars = {
+
+
+
+        };
+        res.render(`/listings/:${req.body.id}`, templateVars);
+      })
       .catch(err => {
         res
           .status(500)
-          .json({ error: err.message });
+          .redirect('error', err.message);
       });
   });
 
@@ -96,7 +116,7 @@ module.exports = (db) => {
       .catch(err => {
         res
           .status(500)
-          .json({ error: err.message });
+          .redirect('error', err.message);
       });
   });
 
@@ -104,18 +124,19 @@ module.exports = (db) => {
   router.get("/listings/:id", (req, res) => {
     db.query(`SELECT * FROM listings;`)                    // (Temporary DEV-only route): create a query which returns the entire database, all tables
       .then(data => {
-        res.json({ data });
+        const templateVars = {
+
+
+
+        };
+        res.render('dev', templateVars);
       })
       .catch(err => {
         res
           .status(500)
-          .json({ error: err.message });
+          .redirect('error', err.message);
       });
   });
 
   return router;
 };
-
-
-
-
