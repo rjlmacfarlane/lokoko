@@ -10,15 +10,18 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/users/:id", (req, res) => {
-    db.query(`PUT QUERY HERE`)
+    db.query(`
+    SELECT * FROM users
+    WHERE id = $1
+    ;`, [req.params.id])
       .then(data => {
         const templateVars = {
-
-
-
-
+          name: data.rows[0].name,
+          province: data.rows[0].province,
+          city: data.rows[0].city,
+          profile_picture: data.rows[0].profile_picture
         };
-        res.render('/users/:id', templateVars);
+        res.render('user', templateVars);
       })
       .catch(err => {
         res

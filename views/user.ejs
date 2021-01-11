@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title><%= name %></title>
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+</head>
+
+<body>
+
+  <table>
+    <tr>
+      <td>
+        <img src=" <%= profile_picture %>">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h3><%= name %></h3>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= city %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= province %>
+      </td>
+    </tr>
+  </table>
+
+</body>
+
+</html>
