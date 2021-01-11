@@ -6,7 +6,11 @@
  */
 
 const express = require('express');
+const bodyParser = require('body-parser')
 const router  = express.Router();
+
+router.use(bodyParser.urlencoded({extended: true}));
+router.use(bodyParser.json());
 
 module.exports = (db) => {
 
@@ -15,10 +19,9 @@ module.exports = (db) => {
     db.query(`SELECT * FROM listings;`)  // This query should be good as-is
       .then(data => {
         const templateVars = {
-
-
-
+          listings: data.rows
         };
+        console.log(data.rows)
         res.render('index', templateVars);
       })
       .catch(err => {
@@ -29,15 +32,13 @@ module.exports = (db) => {
   });
 
   // Get listings by search term:
-  router.get("/", (req, res) => {
+  router.get("/listings", (req, res) => {
     db.query(`SELECT * FROM listings;`)  // Finish: create a query which accepts fuzzy search terms (i.e., LIKE %searchterm%)
       .then(data => {
-        const templateVars = {
-
-
-
+        const templateVars = { //Finish: update templateVars to pull the searched listings
+          listings: data.rows
         };
-        res.render('index', templateVars);
+        res.render('listings', templateVars);
       })
       .catch(err => {
         res
@@ -47,15 +48,18 @@ module.exports = (db) => {
   });
 
   // Show a single listing:
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM listings;`)       // Finish: create a query which grabs listings by user ID (i.e., req.body.id)
+  router.get("/listings/:id", (req, res) => {
+    db.query(`
+    SELECT * FROM listings
+    WHERE id = $1;
+    `, [req.params.id])       // Finish: create a query which grabs listings by user ID (i.e., req.body.id)
       .then(data => {
         const templateVars = {
-
-
+          title: data.rows[0].title,
+          description: data.rows[0].description
 
         };
-        res.render('index', templateVars);
+        res.render('listing_show', templateVars);
       })
       .catch(err => {
         res
@@ -65,22 +69,25 @@ module.exports = (db) => {
   });
 
   // Post a new listing form:
-  router.get('/listings/new', (req, res) => {
-
-    res.render('listings_new');
-
+  router.get('/new', (req, res) => {
+    res.render('listing_new');
   });
 
   // Post a new listing
-  router.post("/listings/", (req, res) => {
-    db.query(`SELECT * FROM listings;`)              // Finish: send new data to database
+  router.post("/listings", (req, res) => {
+    let listing = req.body.listing
+
+    const queryString = `INSERT INTO listings (title, description, thumbnail_photo_url, main_photo_url, price, condition, posted_date, category_id, user_id)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    RETURNING *;
+    `;
+
+    const values = [listing.title, listing.description, listing.thumbnail_photo_url, listing.main_photo_url, listing.price, listing.condition, listing.posted_date, listing.category_id, listing.user_id];
+
+    db.query(queryString, values)
       .then(data => {
-        const templateVars = {
-
-
-
-        };
-        res.render(`/listings/:${req.body.id}`, templateVars);
+        console.log(data.rows[0].id)
+        res.redirect(`/listings/${data.rows[0].id}`);
       })
       .catch(err => {
         res

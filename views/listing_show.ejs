@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home Page</title>
+    <title>Specific Listing</title>
 
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
@@ -12,13 +12,13 @@
   </head>
 
   <body>
-    <h1>Home Page</h1>
+    <h1>Specific Listing</h1>
     <table>
-      <% for(let listing of listings) { %>
-      <tr>
-        <td><%= listing.title %></td>
-      </tr>
-      <% } %>
+      <tr><%= title %></tr>
+      <tr><%= description %></tr>
     </table>
+
+
+
   </body>
 </html>
