@@ -16,6 +16,7 @@ module.exports = (db) => {
 
 
 
+
         };
         res.render('/users/:id', templateVars);
       })
