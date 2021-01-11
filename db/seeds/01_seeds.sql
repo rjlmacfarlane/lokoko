@@ -1,7 +1,7 @@
 INSERT INTO users (name, email, province, city, phone_number, profile_picture) VALUES
 ('Billy Wu', 'wumbo@gmail.com', 'Ontario', 'Toronto', '4164172638', 'https://i.imgur.com/DD4wbUzs.jpg'),
 ('Sara Liu', 'saraliu@gmail.com', 'Ontario', 'Waterloo', '2264917618', 'https://i.imgur.com/DD4wbUzs.jpg'),
-('John Smith', 'johnsmith711@gmail.com', 'Ontario', 'Hamilton', '9054917618', 'https://i.imgur.com/DD4wbUzs.jpg'),
+('John Smith', 'johnsmith@gmail.com', 'Ontario', 'Hamilton', '9054917618', 'https://i.imgur.com/DD4wbUzs.jpg'),
 ('Luke Berzins', 'getting.a.haircut@thebarbershop.com', 'Ontario', 'Toronto', '4165553890', 'https://i.imgur.com/DD4wbUzs.jpg' ),
 ('Elon Musk', 'lets.go@tomars.com', 'Newfoundland and Labrador', 'Paradise', '7099865341', 'https://i.imgur.com/DD4wbUzs.jpg'),
 ('Walter White', 'crystal.blue@persuasion.com', 'Alberta', 'Ft. McMurray', '4032394137', 'https://i.imgur.com/DD4wbUzs.jpg'),
@@ -20,7 +20,7 @@ INSERT INTO listing_categories (name) VALUES
 INSERT INTO listings (title, description, thumbnail_photo_url, main_photo_url, price, condition, posted_date, sold_date, category_id, user_id)
 VALUES
 ('Computer chair', 'blue color', 'https://i.imgur.com/QR2RdTgt.jpg', 'https://i.imgur.com/QR2RdTg.jpg', 30, 'Used', '2008-01-09 15:45:21', NULL, 4, 1),
-('Sennheiser headphones', 'black color, 300 ohms', 'https://i.imgur.com/tNuze0j.jpg', 'https://i.imgur.com/tNuze0t.jpg', 200, 'New', '2008-03-09 15:45:21', NULL, 3, 1),
+('Sennheiser headphones', 'black color, 300 ohms', 'https://i.imgur.com/tNuze0jt.jpg', 'https://i.imgur.com/tNuze0j.jpg', 200, 'New', '2008-03-09 15:45:21', NULL, 3, 1),
 ('Barber Chair', 'black color', 'https://i.redd.it/ewkikofclok41.jpg', 'https://i.redd.it/ewkikofclok41.jpg', 100, 'Used', '2008-03-09 15:45:21', NULL, 4, 2),
 ('2004 Pontiac Aztek', 'Green automatic, new windshield!', 'http://pics.imcdb.org/15489/breakingbads05e04720phdtvx264-evolvemkv_000107064.jpg', 'http://pics.imcdb.org/15489/breakingbads05e04720phdtvx264-evolvemkv_000107064.jpg', 50, 'Used', '2005-03-09 15:45:21', NULL, 1, 6),
 ('Bagpipes', 'Tartan, only used once to get myself fired.', 'https://www.wdiy.org/sites/wdiy/files/styles/medium/public/201707/pipes.jpg', 'https://www.wdiy.org/sites/wdiy/files/styles/medium/public/201707/pipes.jpg', 250, 'Used', '2006-03-09 15:45:21', NULL, 5, 7),
@@ -31,3 +31,10 @@ VALUES
 INSERT INTO favourite_listings (created_date, user_id, listing_id) VALUES
 ('2008-03-10 15:45:21', 1, 3),
 ('2008-05-12 09:45:21', 3, 2);
+
+INSERT INTO messages (message, time_sent, listing_id, sender_id, receiver_id) VALUES
+('Hi, is this still available?', '2008-03-09 20:55:21', 2, 2, 1),
+('Fine keep ignoring me!', '2008-03-09 17:00:04', 2, 2, 1),
+('Jeez I was sleeping', '2008-03-10 07:30:00', 2, 1, 2),
+('$100 is my best offer', '2008-03-10 08:10:07', 2, 2, 1),
+('I''m blocking you...', '2008-03-10 07:30:00', 2, 1, 2);
