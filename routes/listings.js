@@ -6,7 +6,7 @@
  */
 
 const express = require('express');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 const router  = express.Router();
 
 router.use(bodyParser.urlencoded({extended: true}));
@@ -21,7 +21,7 @@ module.exports = (db) => {
         const templateVars = {
           listings: data.rows
         };
-        console.log(data.rows)
+        console.log(data.rows);
         res.render('index', templateVars);
       })
       .catch(err => {
@@ -75,7 +75,7 @@ module.exports = (db) => {
 
   // Post a new listing
   router.post("/listings", (req, res) => {
-    let listing = req.body.listing
+    let listing = req.body.listing;
 
     const queryString = `INSERT INTO listings (title, description, thumbnail_photo_url, main_photo_url, price, condition, posted_date, category_id, user_id)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
@@ -86,7 +86,7 @@ module.exports = (db) => {
 
     db.query(queryString, values)
       .then(data => {
-        console.log(data.rows[0].id)
+        console.log(data.rows[0].id);
         res.redirect(`/listings/${data.rows[0].id}`);
       })
       .catch(err => {
