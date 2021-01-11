@@ -8,6 +8,8 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 const router  = express.Router();
+const moment = require('moment');
+moment().format();
 
 router.use(bodyParser.urlencoded({extended: true}));
 router.use(bodyParser.json());
@@ -49,14 +51,21 @@ module.exports = (db) => {
 
   // Show a single listing:
   router.get("/listings/:id", (req, res) => {
+
     db.query(`
     SELECT * FROM listings
-    WHERE id = $1;
+    JOIN users ON users.id = user_id
+    WHERE listings.id = $1;
     `, [req.params.id])       // Finish: create a query which grabs listings by user ID (i.e., req.body.id)
       .then(data => {
+        //console.log(data.rows)
         const templateVars = {
           title: data.rows[0].title,
-          description: data.rows[0].description
+          description: data.rows[0].description,
+          cover_photo: data.rows[0].main_photo_url,
+          price: data.rows[0].price,
+          posted_date: moment(data.rows[0].posted_date).fromNow(),
+          user_name: data.rows[0].name
 
         };
         res.render('listing_show', templateVars);
@@ -77,7 +86,6 @@ module.exports = (db) => {
   router.post("/listings", (req, res) => {
     let listing = req.body
 
-    console.log(req.body)
     const queryString = `INSERT INTO listings (title, description, thumbnail_photo_url, main_photo_url, price, condition, posted_date, category_id, user_id)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
     RETURNING *;
@@ -85,10 +93,8 @@ module.exports = (db) => {
 
     const values = [listing.title, listing.description, listing.thumbnail_photo_url, listing.main_photo_url, listing.price, listing.condition, listing.posted_date, listing.category_id, listing.user_id];
 
-
     db.query(queryString, values)
       .then(data => {
-        console.log(data.rows[0].id)
         res.redirect(`/listings/${data.rows[0].id}`);
       })
       .catch(err => {

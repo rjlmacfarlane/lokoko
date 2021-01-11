@@ -1,24 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Specific Listing</title>
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+<head>
+  <title>
+    <%= title %>
+  </title>
 
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
-  </head>
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
-  <body>
-    <h1>Specific Listing</h1>
-    <table>
-      <tr><%= title %></tr>
-      <tr><%= description %></tr>
-    </table>
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+</head>
+
+<body>
+  <h1>
+    <%= title %>
+  </h1>
+
+  <table class = "listing_table">
+    <tr>
+    <td>$<%= price %>
+    </td>
+    </tr>
+    <tr>
+      <td><%= posted_date %>
+      </td>
+      </tr>
+    <tr>
+      <td>
+        <img src=" <%= cover_photo %>">
+      </td>
+    </tr>
+    <tr>
+      <td>Description </td>
+    </tr>
+    <tr>
+      <td>
+        <%= description %>
+      </td>
+    </tr>
+  </table>
+
+  <table class = "user_table">
+    <tr>
+    <td>Posted by: <%= user_name %>
+    </td>
+    </tr>
+
+  </table>
 
 
+</body>
 
-  </body>
 </html>
