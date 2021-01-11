@@ -1,0 +1,19 @@
+.navbar {
+  height: 80px;
+  background-color: #B3BFB8;
+  background-image: url("https://www.transparenttextures.com/patterns/swirl.png");
+  color: #FFFFFF;
+  display: flex;
+  justify-content: space-around;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.form-post-new {
+  background-color: #80b69c;
+}
+
+
