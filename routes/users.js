@@ -9,16 +9,20 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
+  router.get("/users/:id", (req, res) => {
+    db.query(`PUT QUERY HERE`)
       .then(data => {
-        const users = data.rows;
-        res.json({ users });
+        const templateVars = {
+
+
+
+        };
+        res.render('/users/:id', templateVars);
       })
       .catch(err => {
         res
           .status(500)
-          .json({ error: err.message });
+          .redirect('error', err.message);
       });
   });
   return router;

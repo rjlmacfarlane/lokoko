@@ -60,7 +60,7 @@ module.exports = (db) => {
       .catch(err => {
         res
           .status(500)
-          .redirect('listings', err.message);
+          .redirect('error', err.message);
       });
   });
 
