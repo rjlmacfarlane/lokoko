@@ -1,17 +1,26 @@
-<header>
-  <nav class="navbar navbar-expand-md navbar-dark bg-success">
-    <a class="navbar-brand" href="/">Lokoko</a>
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+  </head>
 
-      <form class="form-inline" action ="/listings" method="GET">
-        <div class="topnav">
-           <input type="text" placeholder="Search..">
-           <button type="submit" class="btn btn-outline-light" style="margin-right: 1em">Search</button>
-          </div>
-      </form>
+  <body>
 
-      <form class="form-inline" action="/new" method="GET">
+  <div class="navbar">
+    <a class="navbar-brand" href="/"><img src="/img/lokoko.png"></a>
+    <form class="form-inline" action ="/listings" method="GET">
+
+      <div class="topnav">
+        <input type="text" placeholder="Search..">
+        <button type="submit" class="btn btn-outline-light" style="margin-right: 1em">Search</button>
+      </div>
+    </form>
+
+     <form class="form-inline" action="/new" method="GET">
         <button type="submit" class="btn btn-outline-light">Post a New Ad</button>
-      </form>
+     </form>
 
-  </nav>
-</header>
+    </div>
+  </body>
+</html>
+

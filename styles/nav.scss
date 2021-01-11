@@ -1,0 +1,14 @@
+.navbar {
+  height: 100px;
+  background-color: #4d0054;
+  background-image: url("https://www.transparenttextures.com/patterns/inspiration-geometry.png");
+  color: #FFFFFF;
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
