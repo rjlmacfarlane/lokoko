@@ -75,14 +75,16 @@ module.exports = (db) => {
 
   // Post a new listing
   router.post("/listings", (req, res) => {
-    let listing = req.body.listing
+    let listing = req.body
 
+    console.log(req.body)
     const queryString = `INSERT INTO listings (title, description, thumbnail_photo_url, main_photo_url, price, condition, posted_date, category_id, user_id)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
     RETURNING *;
     `;
 
     const values = [listing.title, listing.description, listing.thumbnail_photo_url, listing.main_photo_url, listing.price, listing.condition, listing.posted_date, listing.category_id, listing.user_id];
+
 
     db.query(queryString, values)
       .then(data => {
