@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /*
  * All routes for listings are defined here
  * Since this file is loaded in server.js into api/listings,
@@ -6,7 +7,7 @@
  */
 
 const express = require('express');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 const router  = express.Router();
 const moment = require('moment');
 moment().format();
@@ -23,7 +24,7 @@ module.exports = (db) => {
         const templateVars = {
           listings: data.rows
         };
-       // console.log(data.rows)
+        console.log(data.rows);
         res.render('index', templateVars);
       })
       .catch(err => {
@@ -100,7 +101,7 @@ module.exports = (db) => {
 
   // Post a new listing
   router.post("/listings", (req, res) => {
-    let listing = req.body
+    let listing = req.body;
 
     const queryString = `INSERT INTO listings (title, description, thumbnail_photo_url, main_photo_url, price, condition, posted_date, category_id, user_id)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
