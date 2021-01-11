@@ -54,7 +54,6 @@ module.exports = (db) => {
 
     db.query(queryString, reqValues)
     .then(data => {
-      console.log(data.rows)
         const templateVars = {
           listings: data.rows
         };
