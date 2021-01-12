@@ -36,13 +36,13 @@
 
     <div class="row-spaced">
       <label for="thumbnail-photo-url">Thumbnail Photo URL</label>
-      <input type="text" name="thumbnail_photo_url" class="form-control"
+      <input id="thumbnail_photo_url" type="text" name="thumbnail_photo_url" class="form-control"
         placeholder="Enter Thumbnail Photo URL"></textarea>
     </div>
 
     <div class="row-spaced">
       <label for="cover-photo-url">Main Photo URL</label>
-      <input type="text" name="main_photo_url" class="form-control" placeholder="Enter Main Photo URL"></textarea>
+      <input id="main_photo_url" type="text" name="main_photo_url" class="form-control" placeholder="Enter Main Photo URL"></textarea>
     </div>
 
     <div class="row-spaced">
@@ -70,6 +70,12 @@
       </select>
     </div>
 
+    <div class="row-spaced">
+      <label for="file-pic">Choose file to upload</label>
+      <input type="file" id="file-pic" name="file-pic" accept=".jpg, .jpeg, .png">
+      <img src="" id="img-main" width="680" height="440">
+    </div>
+
     <!-- Will need to remove this once have the user id cookie setup -->
     <div class="row-spaced">
       <label for="user_id">user id</label>
@@ -85,7 +91,7 @@
       <button type="submit" class="submit-button">Submit New Listing</button>
     </div>
   </form>
-
+  <script type="text/javascript" src="./scripts/photo-upload.js"></script>
 </body>
 
 </html>

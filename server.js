@@ -38,6 +38,7 @@ app.use(express.static("public"));
 const listings = require("./routes/listings")
 const user = require("./routes/users")
 const messages = require("./routes/messages")
+const favourites = require("./routes/favourites")
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // app.use("/api/users", usersRoutes(db));
@@ -45,6 +46,7 @@ const messages = require("./routes/messages")
 app.use(listings(db))
 app.use(user(db))
 app.use(messages(db))
+app.use(favourites(db))
 // Note: mount other resources here, using the same pattern above
 
 
