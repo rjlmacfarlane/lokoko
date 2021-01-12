@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /*
  * All routes for listings are defined here
  * Since this file is loaded in server.js into api/listings,
@@ -6,7 +7,7 @@
  */
 
 const express = require('express');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 const router  = express.Router();
 const moment = require('moment');
 moment().format();
@@ -23,7 +24,7 @@ module.exports = (db) => {
         const templateVars = {
           listings: data.rows
         };
-        console.log(data.rows)
+        console.log(data.rows);
         res.render('index', templateVars);
       })
       .catch(err => {
@@ -33,11 +34,27 @@ module.exports = (db) => {
       });
   });
 
+
   // Get listings by search term:
   router.get("/listings", (req, res) => {
-    db.query(`SELECT * FROM listings;`)  // Finish: create a query which accepts fuzzy search terms (i.e., LIKE %searchterm%)
-      .then(data => {
-        const templateVars = { //Finish: update templateVars to pull the searched listings
+    console.log("req.params", req.query.search)
+
+    let queryString ='';
+    let reqValues = [];
+
+    if (req.query.search) {
+      queryString = `
+      SELECT * FROM listings
+      WHERE LOWER(title) LIKE LOWER($1) OR LOWER(description) LIKE LOWER($1)
+      ;`
+      reqValues.push(`%${req.query.search}%`)
+    } else {
+      queryString = `SELECT * FROM listings;`
+    }
+
+    db.query(queryString, reqValues)
+    .then(data => {
+        const templateVars = {
           listings: data.rows
         };
         res.render('listings', templateVars);
@@ -51,7 +68,6 @@ module.exports = (db) => {
 
   // Show a single listing:
   router.get("/listings/:id", (req, res) => {
-
     db.query(`
     SELECT * FROM listings
     JOIN users ON users.id = user_id
@@ -84,7 +100,7 @@ module.exports = (db) => {
 
   // Post a new listing
   router.post("/listings", (req, res) => {
-    let listing = req.body
+    let listing = req.body;
 
     const queryString = `INSERT INTO listings (title, description, thumbnail_photo_url, main_photo_url, price, condition, posted_date, category_id, user_id)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)

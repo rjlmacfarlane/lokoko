@@ -5,7 +5,9 @@
   </header>
 
 <head>
-  <title><%= name %></title>
+  <title>
+  	Favourites
+  </title>
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
@@ -16,30 +18,18 @@
 </head>
 
 <body>
-
-  <table>
-    <tr>
-      <td>
-        <img src=" <%= profile_picture %>">
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <h3><%= name %></h3>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <%= city %>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <%= province %>
-      </td>
-    </tr>
-  </table>
-
+  <div id="fav-container">
+  	<div id="fav-left">
+  		<img />
+  	</div>
+  	<div id="fav-right">
+  		<span>Title</span>
+  		<span>Price</span>
+  	</div>
+  	<div id="fav-bottom">
+  		<span>Date</span>
+  		<button>Remove</button>
+  	</div>
+  </div>
 </body>
-
 </html>

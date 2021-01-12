@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+  <header>
+    <%- include('partials/_header') %>
+  </header>
 
 <head>
   <title>Post New Listing</title>
@@ -7,43 +10,47 @@
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <!-- import fonts:  -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Roboto&display=swap" rel="stylesheet">
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
 </head>
 
 <body>
-
+  <br>
   <h2>Post New Listing</h2>
 
   <form method="POST" action="/listings">
-    <div class="row spaced">
+    <div class="row-spaced">
       <label for="title">Title</label>
       <input type="text" name="title" class="form-control" placeholder="Enter Title">
     </div>
 
-    <div class="row spaced">
+    <div class="row-spaced">
       <label for="description">Description</label>
       <textarea type="text" name="description" class="form-control" placeholder="Enter description"></textarea>
     </div>
 
-    <div class="row spaced">
+    <div class="row-spaced">
       <label for="thumbnail-photo-url">Thumbnail Photo URL</label>
       <input type="text" name="thumbnail_photo_url" class="form-control"
         placeholder="Enter Thumbnail Photo URL"></textarea>
     </div>
 
-    <div class="row spaced">
+    <div class="row-spaced">
       <label for="cover-photo-url">Main Photo URL</label>
       <input type="text" name="main_photo_url" class="form-control" placeholder="Enter Main Photo URL"></textarea>
     </div>
 
-    <div class="row spaced">
+    <div class="row-spaced">
       <label for="price">Price: $</label>
       <input type="number" name="price" class=" form-control" placeholder="Enter Price">
     </div>
 
-    <div class="row spaced">
+    <div class="row-spaced">
       <label for="condition">Condition</label>
       <select name="condition">
         <option value="New">New</option>
@@ -51,7 +58,7 @@
       </select>
     </div>
 
-    <div class="row spaced">
+    <div class="row-spaced">
       <label for="category_id">Category</label>
       <select name="category_id">
         <option value="1">Cars</option>
@@ -64,15 +71,17 @@
     </div>
 
     <!-- Will need to remove this once have the user id cookie setup -->
-    <div class="row spaced">
+    <div class="row-spaced">
       <label for="user_id">user id</label>
       <input type="number" name="user_id" class=" form-control" placeholder="user id">
     </div>
 
     <!-- Need to figure out how to add timestamp automatically -->
-    <input type="datetime-local" name="posted_date" step="1">
+    <div class="row-spaced">
+      <input type="datetime-local" name="posted_date" step="1">
+    </div>
 
-    <div class="row spaced">
+    <div class="row-spaced">
       <button type="submit" class="submit-button">Submit New Listing</button>
     </div>
   </form>

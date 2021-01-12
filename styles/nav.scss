@@ -1,0 +1,28 @@
+.navbar {
+  height: 80px;
+  background-color: #B3BFB8;
+  background-image: url("https://www.transparenttextures.com/patterns/retro-intro.png");
+  color: #FFFFFF;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.form-post-new {
+  background-color: #80b69c;
+}
+
+.search-bar {
+  display: flex;
+}
+
+.navbar-brand {
+  img {
+   max-width: 60% !important;
+   height: auto !important;
+  }
+}
