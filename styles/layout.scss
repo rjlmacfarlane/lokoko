@@ -8,14 +8,27 @@ body {
 }
 
 .row-spaced {
-
   width: 80%;
   padding: 0.5em;
   padding-left: 4em;
   font-family: 'Roboto', sans-serif;
 }
 
+.table {
+  display: flex;
+  justify-content: center;
+}
+
+.table td {
+  border-bottom: 2px;
+  border-color: #000000
+}
+
 h2 {
   display: flex;
   justify-content: center;
 }
+
+a { color: #3c493f; }
+a:hover { color: #66b68f; }
+a:visited { color: #66b68f; }

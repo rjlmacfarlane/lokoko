@@ -25,19 +25,22 @@
   </head>
 
   <body>
-    <h1>Search Results</h1>
-    <table>
-      <% for(let listing of listings) { %>
-      <tr>
-        <td><%= listing.title %></td>
-        <td>$<%= listing.price %></td>
-        <td class="parsed-date"><%= listing.posted_date %></td>
-        <td>
-          <img src=" <%= listing.thumbnail_photo_url %>">
-        </td>
-        </td>
-      </tr>
-      <% } %>
-    </table>
+    <br>
+    <h2>Search Results</h2>
+    <div class="table">
+      <table>
+        <% for(let listing of listings) { %>
+          <tr>
+            <td><a href="listings/<%= listing.id %>"><%= listing.title %></a></td>
+            <td>$<%= listing.price %></td>
+            <td class="parsed-date"><%= listing.posted_date %></td>
+            <td>
+              <a href="listings/<%= listing.id %>"><img src=" <%= listing.thumbnail_photo_url %>" width="80" height="80"></a>
+            </td>
+          </td>
+        </tr>
+        <% } %>
+      </table>
+    </div>
   </body>
 </html>

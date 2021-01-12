@@ -28,18 +28,21 @@
 
   <body>
     <br>
-    <h2>Home Page</h2>
+    <h2>Welcome to Lokoko!</h2>
+    <br>
+    <div class="table">
     <table>
       <% for(let listing of listings) { %>
       <tr>
-        <td><%= listing.title %></td>
+        <td><a href="listings/<%= listing.id %>"><%= listing.title %></a></td>
         <td>$<%= listing.price%></td>
         <td class="parsed-date"><%= listing.posted_date %></td>
         <td>
-          <img src=" <%= listing.thumbnail_photo_url %>">
+          <a href="listings/<%= listing.id %>"><img src=" <%= listing.thumbnail_photo_url %>" width="80" height="80"></a>
         </td>
       </tr>
       <% } %>
     </table>
+  </div>
   </body>
 </html>
