@@ -17,15 +17,22 @@ router.use(bodyParser.json());
 
 module.exports = (db) => {
   // get all messages of a listing from logged in user
-
+  // check if owner of listing and currentUser logged in are the same
+  // can't message themself
+  // sender_id should not be equal to receiver_id
   router.get("/messages/:id/:currentUser", (req, res) => {
     const userID = req.params.currentUser;
     const listingID = req.params.id;
     const otherUserID = db.query(`SELECT user_id FROM listings WHERE id = $1;`, [listingID]).then(data => {
+      if (data.rows[0].user_id == userID) {
+        console.log("owner of listing and current logged in user cannot be the same, can't message themself");
+        res.send("owner of listing and current logged in user cannot be the same, can't message themself");
+        return;
+      }
       return data.rows[0].user_id;
     })
     db.query(`
-      SELECT * 
+      SELECT *
       FROM messages
       JOIN users senders ON sender_id = senders.id
       JOIN users receivers ON receiver_id = receivers.id
