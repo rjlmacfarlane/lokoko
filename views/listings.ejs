@@ -1,46 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-  <header>
-    <%- include('partials/_header') %>
-  </header>
-  <head>
-    <title>Search Results</title>
+<header>
+  <%- include('partials/_header') %>
+</header>
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+<head>
+  <title>Search Results</title>
 
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/vendor/moment.min.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
-    <script>
-      $(document).ready(function() {
-        $('.parsed-date').each(function ( index ) {
-          const formattedDate = moment($(this).text()).fromNow();
-          $(this).text(formattedDate)
-        })
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/vendor/moment.min.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $('.parsed-date').each(function (index) {
+        const formattedDate = moment($(this).text()).fromNow();
+        $(this).text(formattedDate)
       })
-    </script>
-  </head>
+    })
+  </script>
+</head>
 
-  <body>
-    <br>
-    <h2>Search Results</h2>
-    <div class="table">
-      <table>
-        <% for(let listing of listings) { %>
-          <tr>
-            <td><a href="listings/<%= listing.id %>"><%= listing.title %></a></td>
-            <td>$<%= listing.price %></td>
-            <td class="parsed-date"><%= listing.posted_date %></td>
-            <td>
-              <a href="listings/<%= listing.id %>"><img src=" <%= listing.thumbnail_photo_url %>" width="80" height="80"></a>
-            </td>
+<body>
+  <br>
+  <h2>Search Results</h2>
+
+  <form class="filter" method="GET" action="/listings">
+    <!-- keep a record of search string  -->
+    <input type="hidden" id="search" name="search" value="<%= search_string %>">
+
+    <div class="row-spaced">
+
+      <label for="min-price">Min. Price</label>
+      <input type="text" name="min_price" class="form-control" placeholder="Enter minimum price">
+    </div>
+
+    <div class="row-spaced">
+      <label for="max-price">Max. Price</label>
+      <input type="text" name="max_price" class="form-control" placeholder="Enter maximum price">
+    </div>
+
+    <div class="row-spaced">
+      <button type="submit" class="filter-button">Filter</button>
+    </div>
+  </form>
+
+  <div class="table">
+    <table>
+      <% for(let listing of listings) { %>
+        <tr>
+          <td><a href="listings/<%= listing.id %>">
+              <%= listing.title %>
+            </a></td>
+          <td>$<%= listing.price %>
+          </td>
+          <td class="parsed-date">
+            <%= listing.posted_date %>
+          </td>
+          <td>
+            <a href="listings/<%= listing.id %>"><img src=" <%= listing.thumbnail_photo_url %>" width="80"
+                height="80"></a>
+          </td>
           </td>
         </tr>
         <% } %>
-      </table>
-    </div>
-  </body>
+    </table>
+  </div>
+</body>
+
 </html>

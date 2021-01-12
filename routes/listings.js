@@ -59,30 +59,55 @@ module.exports = (db) => {
 
   // Get listings by search term:
   router.get("/listings", (req, res) => {
+
     const userID = req.session.user_id;
-    console.log("req.params", req.query.search);
+    // Beginning of query
+    let queryString = `SELECT * FROM listings`;
+    let queryValues = [];
+    let whereString = ' WHERE ';
 
-    let queryString = '';
-    let reqValues = [];
-
+    // Add applicable params to WHERE string
     if (req.query.search) {
-      queryString = `
-      SELECT * FROM listings
-      WHERE LOWER(title) LIKE LOWER($1) OR LOWER(description) LIKE LOWER($1)
-      ;`;
-      reqValues.push(`%${req.query.search}%`);
-    } else {
-      queryString = `SELECT * FROM listings;`;
+      if (queryValues.length > 0) {
+        whereString += ' AND ';
+      }
+      queryValues.push(`%${req.query.search}%`);
+      whereString += `(LOWER(title) LIKE LOWER($${queryValues.length}) OR LOWER(description) LIKE LOWER($${queryValues.length}))`
     }
 
-    db.query(queryString, reqValues)
+    if (req.query.min_price) {
+      if (queryValues.length > 0) {
+        whereString += ' AND ';
+      }
+      queryValues.push(parseInt(req.query.min_price))
+      whereString += ` price > $${queryValues.length}`
+    }
+
+    if (req.query.max_price) {
+      if (queryValues.length > 0) {
+        whereString += ' AND ';
+      }
+      queryValues.push(parseInt(req.query.max_price))
+      whereString += ` price < $${queryValues.length}`
+    }
+
+    if (queryValues.length > 0) {
+      queryString += whereString;
+    }
+    // End of query
+    queryString += `ORDER BY posted_date DESC;`
+
+    db.query(queryString, queryValues)
       .then(data => {
         const templateVars = {
-
           user: userID,
-          listings: data.rows
-
+          listings: data.rows,
         };
+        // Add seatch string if exists
+        if (req.query.search) {
+          templateVars["search_string"] = req.query.search;
+        }
+
         res.render('listings', templateVars);
       })
       .catch(err => {
