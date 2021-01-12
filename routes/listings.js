@@ -11,11 +11,11 @@ const app = express();
 
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
-const router  = express.Router();
+const router = express.Router();
 const moment = require('moment');
 moment().format();
 
-router.use(bodyParser.urlencoded({extended: true}));
+router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 app.use(cookieSession({
@@ -43,8 +43,6 @@ module.exports = (db) => {
     db.query(`SELECT * FROM listings;`)
       .then(data => {
 
-
-
         const templateVars = {
           user: userID,
           listings: data.rows
@@ -56,8 +54,6 @@ module.exports = (db) => {
           .status(500)
           .redirect('error', err.message);
       });
-
-
   });
 
 
@@ -149,9 +145,7 @@ module.exports = (db) => {
     RETURNING *;
     `;
 
-    const values = [listing.title, listing.description, listing.thumbnail_photo_url, listing.main_photo_url, listing.price, listing.condition, listing.posted_date, listing.category_id, userID];
-
-    console.log(values)
+    const values = [listing.title, listing.description, listing.thumbnail_photo_url, listing.main_photo_url, listing.price, listing.condition, moment(Date.now()).format(), listing.category_id, userID];
 
     db.query(queryString, values)
       .then(data => {
