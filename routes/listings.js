@@ -41,6 +41,9 @@ module.exports = (db) => {
 
     db.query(`SELECT * FROM listings;`)
       .then(data => {
+
+
+
         const templateVars = {
           user: userID,
           listings: data.rows

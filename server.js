@@ -1,4 +1,4 @@
-// load .env data into process.env
+/// load .env data into process.env
 require('dotenv').config();
 
 // Web server config
@@ -9,22 +9,12 @@ const bodyParser = require("body-parser");
 const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
-const cookieSession = require('cookie-session');
-
 
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
-
-
-// Establish cookie session
-app.use(cookieSession({
-  name: 'session',
-  keys: ['key1', 'key2'],
-}));
-
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -45,16 +35,18 @@ app.use(express.static("public"));
 // Note: Feel free to replace the example routes below with your own
 // const usersRoutes = require("./routes/users");
 // const listingsRoutes = require("./routes/widgets");
-const listings = require("./routes/listings");
-const user = require("./routes/users");
-const messages = require("./routes/messages");
+const listings = require("./routes/listings")
+const user = require("./routes/users")
+const messages = require("./routes/messages")
+const favourites = require("./routes/favourites")
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // app.use("/api/users", usersRoutes(db));
 // app.use("/api/listings", listingsRoutes(db));
-app.use(listings(db));
-app.use(user(db));
-app.use(messages(db));
+app.use(listings(db))
+app.use(user(db))
+app.use(messages(db))
+app.use(favourites(db))
 // Note: mount other resources here, using the same pattern above
 
 
