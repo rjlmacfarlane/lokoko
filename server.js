@@ -41,18 +41,18 @@ app.use(cookieSession({
 // Note: Feel free to replace the example routes below with your own
 // const usersRoutes = require("./routes/users");
 // const listingsRoutes = require("./routes/widgets");
-const listings = require("./routes/listings")
-const user = require("./routes/users")
-const messages = require("./routes/messages")
-const favourites = require("./routes/favourites")
+const listings = require("./routes/listings");
+const user = require("./routes/users");
+const messages = require("./routes/messages");
+const favourites = require("./routes/favourites");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // app.use("/api/users", usersRoutes(db));
 // app.use("/api/listings", listingsRoutes(db));
-app.use(listings(db))
-app.use(user(db))
-app.use(messages(db))
-app.use(favourites(db))
+app.use(listings(db));
+app.use(user(db));
+app.use(messages(db));
+app.use(favourites(db));
 // Note: mount other resources here, using the same pattern above
 
 

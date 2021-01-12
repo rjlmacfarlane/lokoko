@@ -151,7 +151,7 @@ module.exports = (db) => {
 
     const values = [listing.title, listing.description, listing.thumbnail_photo_url, listing.main_photo_url, listing.price, listing.condition, listing.posted_date, listing.category_id, userID];
 
-    console.log(values)
+    console.log(values);
 
     db.query(queryString, values)
       .then(data => {
