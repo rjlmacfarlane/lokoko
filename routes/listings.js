@@ -21,10 +21,14 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM listings;`)  // This query should be good as-is
       .then(data => {
+
+
+
         const templateVars = {
-          listings: data.rows
+          listings: data.rows,
+
         };
-        console.log(data.rows);
+
         res.render('index', templateVars);
       })
       .catch(err => {
@@ -72,7 +76,7 @@ module.exports = (db) => {
     SELECT * FROM listings
     JOIN users ON users.id = user_id
     WHERE listings.id = $1;
-    `, [req.params.id])       // Finish: create a query which grabs listings by user ID (i.e., req.body.id)
+    `, [req.params.id])
       .then(data => {
         //console.log(data.rows)
         const templateVars = {

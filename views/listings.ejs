@@ -11,7 +11,17 @@
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/vendor/moment.min.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+
+    <script>
+      $(document).ready(function() {
+        $('.parsed-date').each(function ( index ) {
+          const formattedDate = moment($(this).text()).fromNow();
+          $(this).text(formattedDate)
+        })
+      })
+    </script>
   </head>
 
   <body>
@@ -19,10 +29,12 @@
     <table>
       <% for(let listing of listings) { %>
       <tr>
-        <td><%= listing.id %></td>
         <td><%= listing.title %></td>
+        <td>$<%= listing.price %></td>
+        <td class="parsed-date"><%= listing.posted_date %></td>
         <td>
           <img src=" <%= listing.thumbnail_photo_url %>">
+        </td>
         </td>
       </tr>
       <% } %>
