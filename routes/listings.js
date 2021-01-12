@@ -7,7 +7,10 @@
  */
 
 const express = require('express');
+const app = express();
+
 const bodyParser = require('body-parser');
+const cookieSession = require('cookie-session');
 const router  = express.Router();
 const moment = require('moment');
 moment().format();
@@ -15,16 +18,33 @@ moment().format();
 router.use(bodyParser.urlencoded({extended: true}));
 router.use(bodyParser.json());
 
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2'],
+}));
+
 module.exports = (db) => {
+
+  // Set user session
+  router.get('/login/:id', (req, res) => {
+
+    const userID = req.params.id;
+    req.session.user_id = userID;
+    res.redirect('/');
+
+  });
 
   // Get all listings:
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM listings;`)  // This query should be good as-is
+
+    const userID = req.session.user_id;
+
+    db.query(`SELECT * FROM listings;`)
       .then(data => {
         const templateVars = {
+          user: userID,
           listings: data.rows
         };
-        console.log(data.rows);
         res.render('index', templateVars);
       })
       .catch(err => {
@@ -32,30 +52,36 @@ module.exports = (db) => {
           .status(500)
           .redirect('error', err.message);
       });
+
+
   });
 
 
   // Get listings by search term:
   router.get("/listings", (req, res) => {
-    console.log("req.params", req.query.search)
+    const userID = req.session.user_id;
+    console.log("req.params", req.query.search);
 
-    let queryString ='';
+    let queryString = '';
     let reqValues = [];
 
     if (req.query.search) {
       queryString = `
       SELECT * FROM listings
       WHERE LOWER(title) LIKE LOWER($1) OR LOWER(description) LIKE LOWER($1)
-      ;`
-      reqValues.push(`%${req.query.search}%`)
+      ;`;
+      reqValues.push(`%${req.query.search}%`);
     } else {
-      queryString = `SELECT * FROM listings;`
+      queryString = `SELECT * FROM listings;`;
     }
 
     db.query(queryString, reqValues)
-    .then(data => {
+      .then(data => {
         const templateVars = {
+
+          user: userID,
           listings: data.rows
+
         };
         res.render('listings', templateVars);
       })
@@ -68,14 +94,17 @@ module.exports = (db) => {
 
   // Show a single listing:
   router.get("/listings/:id", (req, res) => {
+    const userID = req.session.user_id;
     db.query(`
     SELECT * FROM listings
     JOIN users ON users.id = user_id
     WHERE listings.id = $1;
-    `, [req.params.id])       // Finish: create a query which grabs listings by user ID (i.e., req.body.id)
+    `, [req.params.id])
       .then(data => {
         //console.log(data.rows)
         const templateVars = {
+
+          user: userID,
           title: data.rows[0].title,
           description: data.rows[0].description,
           cover_photo: data.rows[0].main_photo_url,
@@ -95,14 +124,22 @@ module.exports = (db) => {
 
   // Post a new listing form:
   router.get('/new', (req, res) => {
-    res.render('listing_new');
+    const userID = req.session.user_id;
+    const templateVars = {
+
+      user: userID
+
+    };
+    res.render('listing_new', templateVars);
   });
 
   // Post a new listing
   router.post("/listings", (req, res) => {
+
+    const userID = req.session.user_id;
     let listing = req.body;
 
-    const queryString = `INSERT INTO listings (title, description, thumbnail_photo_url, main_photo_url, price, condition, posted_date, category_id, user_id)
+    const queryString = `INSERT INTO listings (title, description, thumbnail_photo_url, main_photo_url, price, condition, posted_date, category_id, ${userID})
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
     RETURNING *;
     `;
