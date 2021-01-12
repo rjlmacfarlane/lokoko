@@ -29,6 +29,7 @@ module.exports = (db) => {
   router.get('/login/:id', (req, res) => {
 
     const userID = req.params.id;
+
     req.session.user_id = userID;
     res.redirect('/');
 
@@ -142,12 +143,15 @@ module.exports = (db) => {
     const userID = req.session.user_id;
     let listing = req.body;
 
-    const queryString = `INSERT INTO listings (title, description, thumbnail_photo_url, main_photo_url, price, condition, posted_date, category_id, ${userID})
+
+    const queryString = `INSERT INTO listings (title, description, thumbnail_photo_url, main_photo_url, price, condition, posted_date, category_id, user_id)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
     RETURNING *;
     `;
 
-    const values = [listing.title, listing.description, listing.thumbnail_photo_url, listing.main_photo_url, listing.price, listing.condition, listing.posted_date, listing.category_id, listing.user_id];
+    const values = [listing.title, listing.description, listing.thumbnail_photo_url, listing.main_photo_url, listing.price, listing.condition, listing.posted_date, listing.category_id, userID];
+
+    console.log(values)
 
     db.query(queryString, values)
       .then(data => {
