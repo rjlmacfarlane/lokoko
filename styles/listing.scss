@@ -1,0 +1,62 @@
+body {
+  padding-top: 4px;
+  background-color: #f0f7f4;
+  background-image: url("https://www.transparenttextures.com/patterns/retro-intro.png");
+  font-family: 'Black Han Sans', sans-serif;
+}
+
+.listing_table {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  padding-left: 4em;
+  font-family: 'Roboto', sans-serif;
+}
+
+.title {
+  padding-left: 4em;
+}
+
+.h2 {
+  padding-left: 4em;
+  display: flex;
+  justify-content: center;
+  font-family: 'Black Han Sans', sans-serif;
+}
+
+.right {
+  padding-left: 4em;
+  vertical-align: top;
+  font-family: 'Roboto', sans-serif;
+
+  textarea {
+    border-color: #80b69c;
+    width: 375px;
+    height: 125px;
+   }
+
+   textarea:focus {
+    border-color: #80b69c;
+    box-shadow: 0 0 13px #80b69c;
+   }
+
+  .submit {
+    background-color: #80b69c;
+  }
+
+}
+
+.left {
+  vertical-align: text-top;
+
+  img {
+
+    border: 1px  #80b69c;
+    box-shadow: 0px 0px 22px #80b69c;
+    object-fit: cover;
+    width: 400px;
+    height: 500px;
+
+  }
+}
+

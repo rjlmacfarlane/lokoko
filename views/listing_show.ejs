@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <header>
     <%- include('partials/_header') %>
   </header>
@@ -11,49 +12,48 @@
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/listing.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
 </head>
 
 <body>
-  <h1>
-    <%= title %>
-  </h1>
+  <br>
+  <div class="title">
+  <h1><%= title %></h1>
+  </div>
+  <div class = "listing_table">
 
-  <table class = "listing_table">
-    <tr>
-    <td>$<%= price %>
-    </td>
-    </tr>
-    <tr>
-      <td><%= posted_date %>
-      </td>
-      </tr>
-    <tr>
-      <td>
-        <img src=" <%= cover_photo %>">
-      </td>
-    </tr>
-    <tr>
-      <td>Description </td>
-    </tr>
-    <tr>
-      <td>
-        <%= description %>
-      </td>
-    </tr>
-  </table>
+    <table>
+      <thead>
+        <th class="left">
+           <img src=" <%= cover_photo %>" >
+        </th>
+        <th class="right">
+          <h2>$<%= price %></h2>
+          <p>Posted <%= posted_date %></p>
+          <p>Description: <%= description %></p>
+          <br>
+          <p>Posted by: <%= user_name %></p>
 
-  <table class = "user_table">
-    <tr>
-    <td>Posted by: <%= user_name %>
-    </td>
-    </tr>
+          <form class="contact-seller" action="" method="GET">
+            <textarea name="contact-seller" class="form-control" placeholder="Write a message to the seller.."></textarea>
+            <br>
+            <button type="submit" class="btn btn-outline-light" id="submit">Submit</button>
+         </form>
+          <br>
+          <br>
+          <form class="favourite-listing" action="" method="GET"></form>
+          <button type="submit" class="input-group-text" id="basic-addon1">
+            <i class="far fa-heart"> Add this to your favourites</i>
+          </button>
+        </th>
+       </thead>
+    </table>
 
-  </table>
-
+</div>
 
 </body>
 
