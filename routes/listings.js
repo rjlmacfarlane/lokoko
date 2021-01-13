@@ -39,6 +39,14 @@ module.exports = (db) => {
 
   });
 
+  // Logout user session
+  router.get('/logout', (req, res) => {
+    delete req.session.user_id;
+    res.redirect('/');
+  });
+
+
+
   // Get all listings:
   router.get("/", (req, res) => {
 
@@ -173,7 +181,7 @@ module.exports = (db) => {
       text: text
     };
 
-    transporter.sendMail(mailData, function(err, info) {
+    transporter.sendMail(mailData, function (err, info) {
 
       if (err) {
         console.log(err);
@@ -201,9 +209,8 @@ module.exports = (db) => {
   // Post a new listing
   router.post("/listings", (req, res) => {
 
-    const userID = req.session.userId;
+    const userID = req.session.user_id;
     let listing = req.body;
-
 
     const queryString = `INSERT INTO listings (title, description, thumbnail_photo_url, main_photo_url, price, condition, posted_date, category_id, user_id)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
@@ -248,8 +255,8 @@ module.exports = (db) => {
 
     db.query(queryString, values)
 
-    .then(data => {
-       console.log(`/listings/${listing.id}`)
+      .then(data => {
+        console.log(`/listings/${listing.id}`)
         res.redirect(`/listings/${listing.id}`);
       })
       .catch(err => {
@@ -257,7 +264,7 @@ module.exports = (db) => {
           .status(500)
           .redirect('error', err.message);
       });
-    });
+  });
 
 
   // Delete a listing:
