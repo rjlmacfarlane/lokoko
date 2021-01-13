@@ -136,6 +136,21 @@ module.exports = (db) => {
 
     const userID = req.session.user_id;
 
+    let foundFavourite = false;
+    db.query(`
+    SELECT * FROM favourite_listings
+    WHERE listing_id = $1 AND user_id = $2;
+    `, [req.params.id, req.session.user_id])
+      .then(data => {
+        if (data.rows.length > 0) {
+          return foundFavourite = true;
+        }
+      })
+      .catch(err => {
+        res.status(500).redirect('error', err.message);
+      });
+
+
     db.query(`
     SELECT listings.id AS listing_id, * FROM listings
     JOIN users ON users.id = user_id
@@ -152,7 +167,8 @@ module.exports = (db) => {
           price: data.rows[0].price,
           posted_date: moment(data.rows[0].posted_date).fromNow(),
           user_name: data.rows[0].name,
-          sold_date: data.rows[0].sold_date
+          sold_date: data.rows[0].sold_date,
+          foundFavourite: foundFavourite
         };
         res.render('listing_show', templateVars);
       })
