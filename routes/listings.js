@@ -161,7 +161,7 @@ module.exports = (db) => {
   // Post a new listing
   router.post("/listings", (req, res) => {
 
-    const userID = req.session.user_id;
+    const userID = req.session.userId;
     let listing = req.body;
 
 
@@ -172,8 +172,11 @@ module.exports = (db) => {
 
     const values = [listing.title, listing.description, listing.thumbnail_photo_url, listing.main_photo_url, listing.price, listing.condition, moment(Date.now()).format(), listing.category_id, userID];
 
+
     db.query(queryString, values)
+
       .then(data => {
+        console.log(data)
         res.redirect(`/listings/${data.rows[0].id}`);
       })
       .catch(err => {
