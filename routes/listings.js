@@ -52,7 +52,9 @@ module.exports = (db) => {
 
     const userID = req.session.user_id;
 
-    db.query(`SELECT * FROM listings;`)
+    db.query(`
+    SELECT * FROM listings
+    ORDER BY posted_date DESC;`)
       .then(data => {
         console.log(data.rows)
         const templateVars = {
