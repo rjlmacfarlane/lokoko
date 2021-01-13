@@ -8,7 +8,7 @@
 
 const express = require('express');
 const app = express();
-
+const ENV        = process.env.ENV || "development";
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const nodemailer = require('nodemailer');
@@ -46,7 +46,7 @@ module.exports = (db) => {
 
     db.query(`SELECT * FROM listings;`)
       .then(data => {
-        console.log(data.rows)
+        console.log(data.rows);
         const templateVars = {
           user: userID,
           listings: data.rows
@@ -132,7 +132,7 @@ module.exports = (db) => {
     WHERE listings.id = $1;
     `, [req.params.id])
       .then(data => {
-        console.log("when I click on specificlisting", data.rows[0])
+        console.log("when I click on specificlisting", data.rows[0]);
         const templateVars = {
           listing_id: data.rows[0].listing_id,
           user: userID,
@@ -155,20 +155,19 @@ module.exports = (db) => {
 
   // Send an email to seller:
   const transporter = nodemailer.createTransport({
-    port: 465,
-    host: "smtp.gmail.com",
+    port: process.env.MSG_PORT,
+    host: process.env.MSG_HOST,
     auth: {
-      user: 'youremail@gmail.com',
-      pass: 'password',
+      user: process.env.MSG_EMAIL,
+      pass: process.env.MSG_PWD
     },
-    secure: true,
   });
 
   router.post('/send', (req, res) => {
-    const { to, text } = req.body;
+    const { text } = req.body;
     const mailData = {
       from: 'lokoko@lokoko.com',
-      to: to,
+      to: 'douglas.mccullough65@ethereal.email',
       subject: 'Someone is interested in your item!',
       text: text
     };
@@ -177,11 +176,11 @@ module.exports = (db) => {
 
       if (err) {
         console.log(err);
-        res.status(500).send({ message: 'Error!', message_id: info.messageId });
+        res.status(500).send({ message: 'Error! Message not sent!'});
 
       } else {
         console.log(info);
-        res.status(200).send({ message: 'Message sent!', message_id: info.messageId });
+        res.status(200).send({ message: 'Message sent!'});
       }
 
     });
@@ -216,7 +215,7 @@ module.exports = (db) => {
     db.query(queryString, values)
 
       .then(data => {
-        console.log(data)
+        console.log(data);
         res.redirect(`/listings/${data.rows[0].id}`);
       })
       .catch(err => {
@@ -242,14 +241,14 @@ module.exports = (db) => {
     RETURNING *;
     `;
 
-    const values = [moment(Date.now()).format(), listing.id]
-    console.log(queryString)
-    console.log(values)
+    const values = [moment(Date.now()).format(), listing.id];
+    console.log(queryString);
+    console.log(values);
 
     db.query(queryString, values)
 
-    .then(data => {
-       console.log(`/listings/${listing.id}`)
+      .then(data => {
+        console.log(`/listings/${listing.id}`);
         res.redirect(`/listings/${listing.id}`);
       })
       .catch(err => {
@@ -257,7 +256,7 @@ module.exports = (db) => {
           .status(500)
           .redirect('error', err.message);
       });
-    });
+  });
 
 
   // Delete a listing:
