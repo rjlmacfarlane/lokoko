@@ -53,7 +53,13 @@ VALUES
 
 INSERT INTO favourite_listings (created_date, user_id, listing_id) VALUES
 ('2008-03-10 15:45:21', 1, 3),
-('2008-05-12 09:45:21', 3, 2);
+('2008-05-12 09:45:21', 3, 2),
+('2008-05-12 09:45:21', 1, 2),
+('2008-05-12 09:45:21', 1, 4),
+('2008-05-12 09:45:21', 1, 5),
+('2008-05-12 09:45:21', 2, 5),
+('2008-05-12 09:45:21', 2, 3),
+('2008-05-12 09:45:21', 2, 6);
 
 INSERT INTO messages (message, time_sent, listing_id, sender_id, receiver_id) VALUES
 ('Hi, is this still available?', '2008-03-09 20:55:21', 2, 2, 1),

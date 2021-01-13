@@ -1,0 +1,19 @@
+#fav-container {
+  width: 25%;
+  height: 400px;
+}
+
+#main-photo {
+  width: 500px;
+  height: 300px;
+}
+
+#fav-right {
+  display: flex;
+  flex-direction: column;
+}
+
+#fav-bottom {
+  display: flex;
+  justify-content: space-between;
+}
