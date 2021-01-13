@@ -40,6 +40,7 @@ module.exports = (db) => {
   // Get all listings:
   router.get("/", (req, res) => {
 
+    delete req.session.user_id;
     const userID = req.session.user_id;
 
     db.query(`SELECT * FROM listings;`)
@@ -74,30 +75,30 @@ module.exports = (db) => {
         whereString += ' AND ';
       }
       queryValues.push(`%${req.query.search}%`);
-      whereString += `(LOWER(title) LIKE LOWER($${queryValues.length}) OR LOWER(description) LIKE LOWER($${queryValues.length}))`
+      whereString += `(LOWER(title) LIKE LOWER($${queryValues.length}) OR LOWER(description) LIKE LOWER($${queryValues.length}))`;
     }
 
     if (req.query.min_price) {
       if (queryValues.length > 0) {
         whereString += ' AND ';
       }
-      queryValues.push(parseInt(req.query.min_price))
-      whereString += ` price > $${queryValues.length}`
+      queryValues.push(parseInt(req.query.min_price));
+      whereString += ` price > $${queryValues.length}`;
     }
 
     if (req.query.max_price) {
       if (queryValues.length > 0) {
         whereString += ' AND ';
       }
-      queryValues.push(parseInt(req.query.max_price))
-      whereString += ` price < $${queryValues.length}`
+      queryValues.push(parseInt(req.query.max_price));
+      whereString += ` price < $${queryValues.length}`;
     }
 
     if (queryValues.length > 0) {
       queryString += whereString;
     }
     // End of query
-    queryString += `ORDER BY posted_date DESC;`
+    queryString += `ORDER BY posted_date DESC;`;
 
     db.query(queryString, queryValues)
       .then(data => {
