@@ -190,7 +190,10 @@ module.exports = (db) => {
 
       } else {
         console.log(info);
-        res.status(200).send({ message: 'Message sent!'});
+        res
+          .render('sent')
+          .status(200).send({ message: 'Message sent!'});
+
       }
 
     });
