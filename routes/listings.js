@@ -39,12 +39,22 @@ module.exports = (db) => {
 
   });
 
+  // Logout user session
+  router.get('/logout', (req, res) => {
+    delete req.session.user_id;
+    res.redirect('/');
+  });
+
+
+
   // Get all listings:
   router.get("/", (req, res) => {
 
     const userID = req.session.user_id;
 
-    db.query(`SELECT * FROM listings;`)
+    db.query(`
+    SELECT * FROM listings
+    ORDER BY posted_date DESC;`)
       .then(data => {
         console.log(data.rows);
         const templateVars = {
@@ -172,7 +182,7 @@ module.exports = (db) => {
       text: text
     };
 
-    transporter.sendMail(mailData, function(err, info) {
+    transporter.sendMail(mailData, function (err, info) {
 
       if (err) {
         console.log(err);
@@ -203,9 +213,8 @@ module.exports = (db) => {
   // Post a new listing
   router.post("/listings", (req, res) => {
 
-    const userID = req.session.userId;
+    const userID = req.session.user_id;
     let listing = req.body;
-
 
     const queryString = `INSERT INTO listings (title, description, thumbnail_photo_url, main_photo_url, price, condition, posted_date, category_id, user_id)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
