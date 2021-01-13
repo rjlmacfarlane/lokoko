@@ -34,32 +34,15 @@
       <%= title %>
     </h1>
   </div>
-  <div class="listing_table">
 
+  <div class="listing_table">
     <table>
       <thead>
         <th class="left">
           <img src=" <%= cover_photo %>">
         </th>
         <th class="right">
-          <h2>$<%= price %></h2>
-          <p>Posted <%= posted_date %></p>
-          <p>Description: <%= description %></p>
-          <br>
-          <p>Posted by: <%= user_name %></p>
-
-          <form class="contact-seller" method="POST" action="/send">
-            <textarea name="contact-seller" class="form-control" placeholder="Write a message to the seller.."></textarea>
-            <br>
-            <button type="submit" class="btn btn-outline-light" id="submit">Submit</button>
-         </form>
-          <br>
-          <br>
-          <form class="favourite-listing" method="GET" action=""></form>
-          <button type="submit" class="input-group-text" id="basic-addon1">
-            <i class="far fa-heart"> Add this to your favourites</i>
-          </button>
-          <% if (sold_date) { %>
+           <% if (sold_date) { %>
             <h2>SOLD</h2>
                 <% } else { %>
                   <h2>$<%= price %>
@@ -73,12 +56,11 @@
                     <p>Posted by: <%= user_name %>
                     </p>
 
-                    <form class="contact-seller" action="" method="GET">
-                      <textarea name="contact-seller" class="form-control"
-                        placeholder="Write a message to the seller.."></textarea>
+                    <form class="contact-seller" method="POST" action="/send">
+                      <textarea name="contact-seller" class="form-control" placeholder="Write a message to the seller.."></textarea>
                       <br>
                       <button type="submit" class="btn btn-outline-light" id="submit">Submit</button>
-                    </form>
+                   </form>
                     <br>
                     <br>
                     <form class="item-sold" method="POST" action="/listings/<%= listing_id %>">
@@ -86,7 +68,7 @@
                         Mark item as SOLD!
                       </button>
                     </form>
-
+                    <br>
                     <form class="favourite-listing" action="" method="GET"></form>
                     <button type="submit" class="input-group-text" id="basic-addon1">
                       <i class="far fa-heart"> Add this to your favourites</i>
