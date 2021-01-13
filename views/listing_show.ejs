@@ -38,14 +38,14 @@
           <br>
           <p>Posted by: <%= user_name %></p>
 
-          <form class="contact-seller" action="" method="GET">
+          <form class="contact-seller" method="POST" action="/send">
             <textarea name="contact-seller" class="form-control" placeholder="Write a message to the seller.."></textarea>
             <br>
             <button type="submit" class="btn btn-outline-light" id="submit">Submit</button>
          </form>
           <br>
           <br>
-          <form class="favourite-listing" action="" method="GET"></form>
+          <form class="favourite-listing" method="GET" action=""></form>
           <button type="submit" class="input-group-text" id="basic-addon1">
             <i class="far fa-heart"> Add this to your favourites</i>
           </button>

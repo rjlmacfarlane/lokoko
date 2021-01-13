@@ -11,6 +11,7 @@ const app = express();
 
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
+const nodemailer = require('nodemailer');
 const router = express.Router();
 const moment = require('moment');
 moment().format();
@@ -28,9 +29,10 @@ module.exports = (db) => {
   // Set user session
   router.get('/login/:id', (req, res) => {
 
+    delete req.session.user_id;
     const userID = req.params.id;
-
     req.session.user_id = userID;
+
     res.redirect('/');
 
   });
@@ -38,7 +40,6 @@ module.exports = (db) => {
   // Get all listings:
   router.get("/", (req, res) => {
 
-    delete req.session.user_id;
     const userID = req.session.user_id;
 
     db.query(`SELECT * FROM listings;`)
@@ -146,6 +147,40 @@ module.exports = (db) => {
           .status(500)
           .redirect('error', err.message);
       });
+  });
+
+  // Send an email to seller:
+  const transporter = nodemailer.createTransport({
+    port: 465,
+    host: "smtp.gmail.com",
+    auth: {
+      user: 'youremail@gmail.com',
+      pass: 'password',
+    },
+    secure: true,
+  });
+
+  router.post('/send', (req, res) => {
+    const { to, text } = req.body;
+    const mailData = {
+      from: 'lokoko@lokoko.com',
+      to: to,
+      subject: 'Someone is interested in your item!',
+      text: text
+    };
+
+    transporter.sendMail(mailData, function(err, info) {
+
+      if (err) {
+        console.log(err);
+        res.status(500).send({ message: 'Error!', message_id: info.messageId });
+
+      } else {
+        console.log(info);
+        res.status(200).send({ message: 'Message sent!', message_id: info.messageId });
+      }
+
+    });
   });
 
   // Post a new listing form:
