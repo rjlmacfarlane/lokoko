@@ -15,8 +15,10 @@ const router = express.Router();
 const moment = require('moment');
 moment().format();
 
+
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
+
 
 app.use(cookieSession({
   name: 'session',
@@ -38,11 +40,12 @@ module.exports = (db) => {
   // Get all listings:
   router.get("/", (req, res) => {
 
+    delete req.session.user_id;
     const userID = req.session.user_id;
 
     db.query(`SELECT * FROM listings;`)
       .then(data => {
-
+        console.log(data.rows)
         const templateVars = {
           user: userID,
           listings: data.rows
@@ -72,30 +75,30 @@ module.exports = (db) => {
         whereString += ' AND ';
       }
       queryValues.push(`%${req.query.search}%`);
-      whereString += `(LOWER(title) LIKE LOWER($${queryValues.length}) OR LOWER(description) LIKE LOWER($${queryValues.length}))`
+      whereString += `(LOWER(title) LIKE LOWER($${queryValues.length}) OR LOWER(description) LIKE LOWER($${queryValues.length}))`;
     }
 
     if (req.query.min_price) {
       if (queryValues.length > 0) {
         whereString += ' AND ';
       }
-      queryValues.push(parseInt(req.query.min_price))
-      whereString += ` price > $${queryValues.length}`
+      queryValues.push(parseInt(req.query.min_price));
+      whereString += ` price > $${queryValues.length}`;
     }
 
     if (req.query.max_price) {
       if (queryValues.length > 0) {
         whereString += ' AND ';
       }
-      queryValues.push(parseInt(req.query.max_price))
-      whereString += ` price < $${queryValues.length}`
+      queryValues.push(parseInt(req.query.max_price));
+      whereString += ` price < $${queryValues.length}`;
     }
 
     if (queryValues.length > 0) {
       queryString += whereString;
     }
     // End of query
-    queryString += `ORDER BY posted_date DESC;`
+    queryString += `ORDER BY posted_date DESC;`;
 
     db.query(queryString, queryValues)
       .then(data => {
@@ -119,24 +122,26 @@ module.exports = (db) => {
 
   // Show a single listing:
   router.get("/listings/:id", (req, res) => {
+
     const userID = req.session.user_id;
+
     db.query(`
-    SELECT * FROM listings
+    SELECT listings.id AS listing_id, * FROM listings
     JOIN users ON users.id = user_id
     WHERE listings.id = $1;
     `, [req.params.id])
       .then(data => {
-        //console.log(data.rows)
+        console.log("when I click on specificlisting", data.rows[0])
         const templateVars = {
-
+          listing_id: data.rows[0].listing_id,
           user: userID,
           title: data.rows[0].title,
           description: data.rows[0].description,
           cover_photo: data.rows[0].main_photo_url,
           price: data.rows[0].price,
           posted_date: moment(data.rows[0].posted_date).fromNow(),
-          user_name: data.rows[0].name
-
+          user_name: data.rows[0].name,
+          sold_date: data.rows[0].sold_date
         };
         res.render('listing_show', templateVars);
       })
@@ -146,6 +151,7 @@ module.exports = (db) => {
           .redirect('error', err.message);
       });
   });
+
 
   // Post a new listing form:
   router.get('/new', (req, res) => {
@@ -186,23 +192,39 @@ module.exports = (db) => {
       });
   });
 
-  // Update an existing listing:
-  router.put("/listings/:id", (req, res) => {
-    db.query(`SELECT * FROM listings;`)               // Finish: create a query which locates a listing by ID and updates it with new data
-      .then(data => {
-        const templateVars = {
+
+  // Mark a listing as sold
+  router.post("/listings/:id", (req, res) => {
 
 
+    let listing = req.params;
 
-        };
-        res.render(`/listings/:${req.body.id}`, templateVars);
+    console.log(req.params.id);
+
+    const queryString = `
+    UPDATE listings
+    SET sold_date = $1
+    WHERE id = $2
+    RETURNING *;
+    `;
+
+    const values = [moment(Date.now()).format(), listing.id]
+    console.log(queryString)
+    console.log(values)
+
+    db.query(queryString, values)
+
+    .then(data => {
+       console.log(`/listings/${listing.id}`)
+        res.redirect(`/listings/${listing.id}`);
       })
       .catch(err => {
         res
           .status(500)
           .redirect('error', err.message);
       });
-  });
+    });
+
 
   // Delete a listing:
   router.delete("listings/:id", (req, res) => {
