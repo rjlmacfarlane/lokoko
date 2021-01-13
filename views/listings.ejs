@@ -56,8 +56,13 @@
           <td><a href="listings/<%= listing.id %>">
               <%= listing.title %>
             </a></td>
-          <td>$<%= listing.price %>
-          </td>
+            <% if (!listing.sold_date) { %>
+              <td>$<%= listing.price %>
+              </td>
+              <% } else { %>
+                <td>SOLD %>
+                </td>
+                <% } %>
           <td class="parsed-date">
             <%= listing.posted_date %>
           </td>
