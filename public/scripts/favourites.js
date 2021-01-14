@@ -6,13 +6,28 @@
 $(document).ready(function() {
 
   const deleteFav = function(listing_id) {
+    // console.log("LISTING ID IS" + listing_id)
     $.ajax({
       method: 'POST',
       url: `/favourites/${window.location.pathname.split('/')[2]}`,
       data: {listing_id}
     })
       .then(() => {
-        console.log("POST REQUEST")
+        // console.log("POST REQUEST")
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  const addFav = function(listing_id) {
+    $.ajax({
+      method: 'POST',
+      url: `/favourites`,
+      data: {listing_id}
+    })
+      .then(() => {
+        console.log("Added to fav")
       })
       .catch((err) => {
         console.log(err);
@@ -33,15 +48,30 @@ $(document).ready(function() {
   };
 
     // On the remove button click
-  $('.fav-button').on('click', function(event) {
-    const favContainer = $(this).parent('#fav-bottom').parent('#fav-container')
+  $('.fav-remove-button').on('click', function(event) {
+    const favContainer = $(this).parent('#fav-bottom').parent('#fav-container');
 
     // delete a favourite
     console.log("AFTER CLICK : " + event.target.value)
     deleteFav(event.target.value);
     // deletes html instantly
     favContainer.remove();
+    // load initial favs
+    loadFavourites();
   });
-  // load initial favs
-  loadFavourites();
+
+  // const addFavButton = $('.fav-add-button');
+  // add to favourite
+  $('.fav-add-button').on('click', function(event) {
+    addFav(event.target.value);
+    // deletes html button
+    $(this).remove();
+  });
+
+  // $('.fav-class').on('click', function(event) {
+  //   addFav(event.target.value);
+  //   // deletes html button
+  //   $(addFavButton).remove();
+  // });
+
 });
