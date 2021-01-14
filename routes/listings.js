@@ -64,6 +64,7 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
 
     const userID = req.session.user_id;
+    console.log("USER ID: ", userID)
 
     db.query(`
     SELECT * FROM listings
@@ -71,9 +72,13 @@ module.exports = (db) => {
       .then(data => {
         const templateVars = {
           user: userID,
-          name: req.session.user.name,
           listings: data.rows
         };
+
+        if (req.session.user){
+          templateVars["name"] =  req.session.user.name
+        }
+
         res.render('index', templateVars);
       })
       .catch(err => {
@@ -122,18 +127,22 @@ module.exports = (db) => {
       queryString += whereString;
     }
     // End of query
-    queryString += `ORDER BY posted_date DESC;`;
+    queryString += ` ORDER BY posted_date DESC;`;
+
+console.log(queryString)
 
     db.query(queryString, queryValues)
       .then(data => {
         const templateVars = {
           user: userID,
-          name: req.session.user.name,
           listings: data.rows,
         };
-        // Add seatch string if exists
-        if (req.query.search) {
-          templateVars["search_string"] = req.query.search;
+
+        // Add seatch string or empty
+        templateVars["search_string"] = req.query.search || "";
+
+        if (req.session.user){
+          templateVars["name"] =  req.session.user.name
         }
 
         res.render('listings', templateVars);
@@ -174,7 +183,6 @@ module.exports = (db) => {
         const templateVars = {
           listing_id: data.rows[0].listing_id,
           user: userID,
-          name: req.session.user.name,
           title: data.rows[0].title,
           description: data.rows[0].description,
           cover_photo: data.rows[0].main_photo_url,
@@ -184,6 +192,11 @@ module.exports = (db) => {
           sold_date: data.rows[0].sold_date,
           foundFavourite: foundFavourite
         };
+
+        if (req.session.user){
+          templateVars["name"] =  req.session.user.name
+        }
+
         res.render('listing_show', templateVars);
       })
       .catch(err => {
@@ -233,9 +246,12 @@ module.exports = (db) => {
   router.get('/new', (req, res) => {
     const userID = req.session.user_id;
     const templateVars = {
-      user: userID,
-      name: req.session.user.name
+      user: userID
     };
+
+    if (req.session.user){
+      templateVars["name"] =  req.session.user.name
+    }
     res.render('listing_new', templateVars);
   });
 
