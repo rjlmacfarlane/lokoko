@@ -1,26 +1,11 @@
-#fav-container {
-  margin: 30px;
-  width: 25%;
-  height: 400px;
-}
-
-#main-photo {
-  width: 500px;
-  height: 300px;
-}
-
-#fav-right {
-  display: flex;
-  flex-direction: column;
-}
-
-#fav-bottom {
-  display: flex;
-  justify-content: space-between;
+.banner {
+  background: #d1f0df;
+  background: -webkit-linear-gradient(to right, #6e8877, #45927f, #32ad65);
+  background: linear-gradient(to right, #6e8877, #45927f, #32ad65);
 }
 
 .fav-remove-button {
-  background-color: rgb(247, 247, 247);
+  background-color: rgb(255, 228, 228);
  	color: red;
  	font-size: 20px;
  	font-family: 'Courier New', Courier, monospace;
