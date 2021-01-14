@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/vendor/moment.min.js"></script>
@@ -28,49 +30,43 @@
 <body>
   <br>
   <h2>Search Results</h2>
-
+  <br>
   <form class="filter" method="GET" action="/listings">
     <!-- keep a record of search string  -->
     <input type="hidden" id="search" name="search" value="<%= search_string %>">
 
-    <div class="row-spaced">
+    <div class="price-filter">
 
-      <label for="min-price">Min. Price</label>
-      <input type="text" name="min_price" class="form-control" placeholder="Enter minimum price">
-    </div>
+      <input type="text" name="min_price" class="form-control" placeholder="Minimum price">
 
-    <div class="row-spaced">
-      <label for="max-price">Max. Price</label>
-      <input type="text" name="max_price" class="form-control" placeholder="Enter maximum price">
-    </div>
+      <input type="text" name="max_price" class="form-control" placeholder="Maximum price">
 
-    <div class="row-spaced">
-      <button type="submit" class="filter-button">Filter</button>
+      <button type="submit" class="btn btn-outline-light">Filter</button>
     </div>
   </form>
 
-  <div class="table">
+  <div class="table animate__animated animate__slideInLeft">
     <table>
+
       <% for(let listing of listings) { %>
         <tr>
           <td><a href="listings/<%= listing.id %>">
               <%= listing.title %>
             </a></td>
-            <% if (!listing.sold_date) { %>
-              <td>$<%= listing.price %>
+          <% if (!listing.sold_date) { %>
+            <td>$<%= listing.price %>
+            </td>
+            <% } else { %>
+              <td>SOLD %>
               </td>
-              <% } else { %>
-                <td>SOLD %>
+              <% } %>
+                <td class="parsed-date">
+                  <%= listing.posted_date %>
                 </td>
-                <% } %>
-          <td class="parsed-date">
-            <%= listing.posted_date %>
-          </td>
-          <td>
-            <a href="listings/<%= listing.id %>"><img src=" <%= listing.thumbnail_photo_url %>" width="80"
-                height="80"></a>
-          </td>
-          </td>
+                <td>
+                  <a href="listings/<%= listing.id %>"><img src=" <%= listing.thumbnail_photo_url %>" width="80"
+                      height="80"></a>
+                </td>
         </tr>
         <% } %>
     </table>

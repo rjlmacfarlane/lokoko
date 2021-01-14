@@ -17,6 +17,7 @@ body {
 .table {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .table td {
@@ -27,6 +28,20 @@ body {
 h2 {
   display: flex;
   justify-content: center;
+}
+
+.price-filter {
+  display: flex;
+  justify-content: center;
+  font-family: 'Roboto', sans-serif;
+  padding-bottom: 3em;
+  input {
+    width: 145px;
+    height: auto;
+  }
+  button {
+    background-color: #80b69c;
+  }
 }
 
 a { color: #3c493f; }

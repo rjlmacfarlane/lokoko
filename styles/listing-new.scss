@@ -1,0 +1,21 @@
+body {
+  padding-top: 4px;
+  background-color: #f0f7f4;
+  background-image: url("https://www.transparenttextures.com/patterns/retro-intro.png");
+  font-family: 'Black Han Sans', sans-serif;
+}
+.row-spaced {
+  width: 80%;
+  padding: 0.5em;
+  padding-left: 4em;
+  font-family: 'Roboto', sans-serif;
+}
+
+#price {
+  width: 175px;
+  height: auto;
+}
+h2 {
+  display: flex;
+  justify-content: center;
+}
