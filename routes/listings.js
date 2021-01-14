@@ -240,7 +240,7 @@ module.exports = (db) => {
     const { text } = req.body;
     const mailData = {
       from: 'lokoko@lokoko.com',
-      to: 'douglas.mccullough65@ethereal.email',
+      to: 'jensen.rempel@ethereal.email',
       subject: 'Someone is interested in your item!',
       text: text
     };
@@ -292,7 +292,7 @@ module.exports = (db) => {
     db.query(queryString, values)
 
       .then(data => {
-        console.log(data)
+        console.log(data);
         res.redirect(`/listings/${data.rows[0].id}`);
       })
       .catch(err => {
