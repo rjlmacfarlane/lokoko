@@ -19,20 +19,23 @@ INSERT INTO listing_categories (name) VALUES
 
 INSERT INTO listings (title, description, thumbnail_photo_url, main_photo_url, price, condition, posted_date, sold_date, category_id, user_id)
 VALUES
-('Computer chair', 'blue color', 'https://i.imgur.com/QR2RdTgt.jpg', 'https://i.imgur.com/QR2RdTg.jpg', 30, 'Used', '2008-01-09 15:45:21', NULL, 4, 1),
-('Sennheiser headphones', 'black color, 300 ohms', 'https://i.imgur.com/tNuze0jt.jpg', 'https://i.imgur.com/tNuze0j.jpg', 200, 'New', '2008-03-09 15:45:21', NULL, 3, 1),
-('Barber Chair', 'black color', 'https://i.redd.it/ewkikofclok41.jpg', 'https://i.redd.it/ewkikofclok41.jpg', 100, 'Used', '2008-03-09 15:45:21', NULL, 4, 2),
-('2004 Pontiac Aztek', 'Green automatic, new windshield!', 'http://pics.imcdb.org/15489/breakingbads05e04720phdtvx264-evolvemkv_000107064.jpg', 'http://pics.imcdb.org/15489/breakingbads05e04720phdtvx264-evolvemkv_000107064.jpg', 50, 'Used', '2005-03-09 15:45:21', NULL, 1, 6),
+('Computer chair', 'Blue computer chair. Got it from Walmart ages ago. Just a chair. Nothing great about it, nothing wrong with it. If you have a computer, you can also have a chair.', 'https://i.imgur.com/QR2RdTgt.jpg', 'https://i.imgur.com/QR2RdTg.jpg', 30, 'Used', '2008-01-09 15:45:21', NULL, 4, 1),
 
-('Bagpipes', 'Tartan, only used once to get myself fired.', 'https://www.wdiy.org/sites/wdiy/files/styles/medium/public/201707/pipes.jpg', 'https://www.wdiy.org/sites/wdiy/files/styles/medium/public/201707/pipes.jpg', 250, 'Used', '2006-03-09 15:45:21', NULL, 5, 7),
+('Sennheiser headphones', 'Black color, 300 ohms. Awesome bass. Selling because they tend to fall off when headbanging. They work great for studio headphones, but not for headbanging. Headbanging is bad for your brain anyway.', 'https://i.imgur.com/tNuze0jt.jpg', 'https://i.imgur.com/tNuze0j.jpg', 200, 'New', '2008-03-09 15:45:21', NULL, 3, 1),
 
-('Falcon 9 Rocket', 'Launched seven times. Inserted 311 Starlink satellites into orbit.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Bangabandhu_Satellite-1_Mission_(42025499722).jpg/270px-Bangabandhu_Satellite-1_Mission_(42025499722).jpg', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Bangabandhu_Satellite-1_Mission_(42025499722).jpg/270px-Bangabandhu_Satellite-1_Mission_(42025499722).jpg', 90000000, 'Used', '2020-05-05 13:30:21', NULL, 6, 5),
+('Barber Chair', 'Selling this classic barber chair. I have had my hair cut in this chair probably a million times. I get haircuts three times a week, so a lot have been done in this chair. Now you can sit in this chair and get your haircut as many times as I did.', 'https://i.redd.it/ewkikofclok41.jpg', 'https://i.redd.it/ewkikofclok41.jpg', 1250, 'Used', '2008-03-09 15:45:21', NULL, 4, 4),
+
+('2004 Pontiac Aztek', 'Green, automatic transmission. Definitely has not been used to transport any controlled substances. I hit a deer a while back, but I got it fixed. Selling because I am a big shot now and I want to buy a sports car. New windshield!', 'http://pics.imcdb.org/15489/breakingbads05e04720phdtvx264-evolvemkv_000107064.jpg', 'http://pics.imcdb.org/15489/breakingbads05e04720phdtvx264-evolvemkv_000107064.jpg', 50, 'Used', '2005-03-09 15:45:21', NULL, 1, 6),
+
+('Bagpipes', 'Tartan, only used once to get myself fired. I could never fit in with the real lawyers. They are a bunch of squares.', 'https://www.wdiy.org/sites/wdiy/files/styles/medium/public/201707/pipes.jpg', 'https://www.wdiy.org/sites/wdiy/files/styles/medium/public/201707/pipes.jpg', 250, 'Used', '2006-03-09 15:45:21', NULL, 5, 7),
+
+('Falcon 9 Rocket', 'Launched seven times. Inserted 311 Starlink satellites into orbit, and two classified spy sattelites for the US government. Selling to finance my trip to Mars.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Bangabandhu_Satellite-1_Mission_(42025499722).jpg/270px-Bangabandhu_Satellite-1_Mission_(42025499722).jpg', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Bangabandhu_Satellite-1_Mission_(42025499722).jpg/270px-Bangabandhu_Satellite-1_Mission_(42025499722).jpg', 90000000, 'Used', '2020-05-05 13:30:21', NULL, 6, 5),
 
 ('Stage worn costume', 'Worn on tour in Winnipeg, 1984', 'https://i.pinimg.com/736x/2f/16/66/2f1666025c24dbb32a55457cb3e1f80c.jpg', 'https://i.pinimg.com/736x/2f/16/66/2f1666025c24dbb32a55457cb3e1f80c.jpg', 4000, 'Used', '2005-03-09 15:45:21', NULL, 2, 8),
 
 ('Uber Alternative', 'Screw uber! Never drink and drive. Message me and I will come get you in a 2000 Ford F-250 4x4, with a case of beer in a cooler in the back, blasting Skynyrd on the speakers, hollaring HELL YEAH BROTHER! at everything you say.', '/img/truck.png', '/img/truck.png', 20, 'New', '2021-01-11 15:30:00', NULL, 6, 1),
 
-('50 lbs of Almonds!', 'HELP! I accidentally ordered 50 pounds of almonds. I only needed 1 for my recipe. Please, my girlfriend will kill me, only $1!', '/img/almonds.png', '/img/almonds.png', 1, 'New', '2021-01-11 14:12:00', NULL, 6, 4),
+('50 lbs of Almonds!', 'HELP! I accidentally ordered 50 pounds of almonds. I only needed 1 for my recipe. Please, my girlfriend will kill me, only $1!', '/img/almonds.png', '/img/almonds.png', 1, 'New', '2021-01-11 14:12:00', NULL, 6, 2),
 
 ('Australian Didgeridoo', 'Authentic Australian Aboriginal Didgeridoo. Needs work. $10', '/img/didge.png', '/img/didge.png', 10, 'New', '2021-01-07 14:12:00', NULL, 5, 8),
 
@@ -48,7 +51,20 @@ VALUES
 
 ('Saddle', 'Very comfortable, white colour, fits any horse, SUPER easy to clean. Ride in style!', '/img/saddle.png', '/img/saddle.png', 12, 'Used', '2021-01-06 18:12:00', NULL, 6, 1),
 
-('Authentic Horgon from Risa', 'Attract the mate of your dreams with this authentic Horgon from the planet Risa, or give it as a gift to your lonely captain.', '/img/horgon.png', '/img/horgon.png', 55, 'New', '2021-01-10 08:12:00', NULL, 4, 9);
+('Authentic Horgon from Risa', 'Attract the mate of your dreams with this authentic Horgon from the planet Risa, or give it as a gift to your lonely captain.', '/img/horgon.png', '/img/horgon.png', 55, 'New', '2021-01-10 08:12:00', NULL, 4, 9),
+
+('Barber services in the GTA!', 'Hi my name is Luke Berzins. I love getting haircuts, and I love giving haircuts! I will be offering evening and weekend haircut services to help pay for my Web Development Bootcamp and Lighthouse Labs. Any type of hair, any type of style, just drop me a line!', '/img/barber.png', '/img/barber.png', 20, 'New', '2020-11-23 10:00:00', NULL, 6, 4),
+
+('Conair Even Cut Electric Barber Clippers', 'Selling these Conair Even Cut electric barber clippers. I have 400 of them, all brand new, unopened and never used. I have so many of these, they are piling up in my house and I have no more room to walk around. My girlfriend keeps tripping over them and my dog is always sad. They gotta go, selling for cheap!', '/img/conair.png', '/img/conair.png', 15, 'New', '2021-01-01 08:12:00', NULL, 3, 4),
+
+('Vintage Barber Set', 'Vintage barber set, includes electric clippers with blade oil and attachments, whisker brush, scissors, and comb. This has been in my family since my grandfather lived in Latvia. Selling so that I can buy an awesome new computer to do my web development work on.', '/img/vintage-clippers.png', '/img/vintage-clippers.png', 40, 'New', '2020-12-23 10:00:00', NULL, 6, 4),
+
+('Gentlemen Barber Mustache Kit', 'Gentlemen Barber Mustache Kit. Includes mustache comb, mustache wax, and a small pair of scissors. I got this for Christmas. Selling because I do not have a mustache.', '/img/mustache-kit.png', '/img/mustache-kit.png', 12, 'New', '2020-12-26 18:42:10', NULL, 6, 4),
+
+('Japanese Barber Scissors', 'Premium quality barber scissors, handmade in Japan by Japanese barber-monks. Comes in a real leather case. Picked these up when I went to Japan for a haircut.', '/img/japan-scissors.png', '/img/japan-scissors.png', 50, 'Used', '2021-01-13 17:12:55', NULL, 6, 4 ),
+
+('Barber Shop Art Prints, 4-piece', 'Here is a 4-piece set of barber shop art prints. Perfect if you own a barber shop (like I do), or if you are in a barbershop quartet: each member can have their own!', '/img/barber-prints.png', '/img/barber-prints.png', 30, 'Used', '2021-01-12 13:42:15', NULL, 6, 4);
+
 
 
 INSERT INTO favourite_listings (created_date, user_id, listing_id) VALUES
