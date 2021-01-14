@@ -32,24 +32,28 @@
 <body>
   <br>
   <h2>Welcome to Lokoko!</h2>
+  <p><em>"Kijiji? Never heard of it."</em></p>
+  <br><br>
+  <h3>Check out our latest listings:</h3>
   <br>
-  <div class="table animate__animated animate__slideInLeft">
+  <div class="table animate__animated animate__fadeIn animate__slow">
+
     <table>
 
       <% for(let listing of listings) { %>
         <tr>
           <td class="left"><a href="listings/<%= listing.id %>">
-              <%= listing.title %>
+          <strong><%= listing.title %></strong>
             </a></td>
           <% if (!listing.sold_date) { %>
-            <td>$<%= listing.price %>
+            <td><strong>$<%= listing.price %></strong>
             </td>
             <% } else { %>
-              <td>SOLD %>
+              <td><strong>SOLD %></strong>
               </td>
               <% } %>
                 <td class="parsed-date">
-                  <%= listing.posted_date %>
+                <strong><%= listing.posted_date %></strong>
                 </td>
                 <td class="right">
                   <a href="listings/<%= listing.id %>"><img src=" <%= listing.thumbnail_photo_url %>" width="80"
@@ -60,7 +64,4 @@
     </table>
   </div>
   </body>
-  <footer>
-    <%- include('partials/_footer') %>
-  </footer>
 </html>

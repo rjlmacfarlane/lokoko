@@ -9,6 +9,7 @@ app.use(cookieSession({
 }));
 
 module.exports = (db) => {
+  // show favourites for specific user
   router.get("/favourites/:id", (req, res) => {
     let userId = req.params.id;
     let queryString = `
@@ -27,7 +28,7 @@ module.exports = (db) => {
         if (req.session.user){
           templateVars["name"] =  req.session.user.name
         }
-
+        console.log('DATA ROWS' + JSON.stringify(templateVars['favourites']))
         // Note: id and listing_id of data.rows is identical
         res.render('favourites', templateVars)
       })
