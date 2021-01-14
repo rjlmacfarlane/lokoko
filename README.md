@@ -18,7 +18,7 @@ Lokoko Buy/Sell App
 
 !["Browse listings from your area!"](https://github.com/rjlmacfarlane/lokoko/blob/master/docs/post-new-ad.png)
 
-!["Browse listings from your area!"](https://github.com/rjlmacfarlane/lokoko/blob/master/docs/user-profiles.png)
+!["Browse listings from your area!"](https://github.com/rjlmacfarlane/lokoko/blob/master/docs/user-profile.png)
 
 ## Getting Started
 
