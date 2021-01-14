@@ -13,7 +13,7 @@ $(document).ready(function() {
       data: {listing_id}
     })
       .then(() => {
-        // console.log("POST REQUEST")
+        // do nothing
       })
       .catch((err) => {
         console.log(err);
@@ -28,7 +28,7 @@ $(document).ready(function() {
       data: {listing_id}
     })
       .then(() => {
-        console.log("Added to fav")
+        // do nothing
       })
       .catch((err) => {
         console.log(err);
@@ -36,7 +36,6 @@ $(document).ready(function() {
   }
 
   const loadFavourites = function() {
-    // const userID = req.session.userId
     const url = `http://localhost:8080/favourites/${window.location.pathname.split('/')[2]}`;
     $.ajax({
       method: 'GET',
@@ -50,8 +49,7 @@ $(document).ready(function() {
 
     // On the remove button click
   $('.fav-remove-button').on('click', function(event) {
-    const favContainer = $(this).parent('#fav-bottom').parent('#fav-container');
-
+    const favContainer = $(this).parent('.d-flex').parent('.p-4').parent('.bg-white').parent('#fav-container');
     // delete a favourite
     console.log("AFTER CLICK : " + event.target.value)
     deleteFav(event.target.value);
