@@ -49,7 +49,7 @@ $(document).ready(function() {
 
     // On the remove button click
   $('.fav-remove-button').on('click', function(event) {
-    const favContainer = $(this).parent('#fav-bottom').parent('#fav-container')
+    const favContainer = $(this).parent('#fav-bottom').parent('#fav-container');
 
     // delete a favourite
     console.log("AFTER CLICK : " + event.target.value)
@@ -60,11 +60,18 @@ $(document).ready(function() {
     loadFavourites();
   });
 
+  // const addFavButton = $('.fav-add-button');
   // add to favourite
   $('.fav-add-button').on('click', function(event) {
     addFav(event.target.value);
     // deletes html button
     $(this).remove();
   });
+
+  // $('.fav-class').on('click', function(event) {
+  //   addFav(event.target.value);
+  //   // deletes html button
+  //   $(addFavButton).remove();
+  // });
 
 });
