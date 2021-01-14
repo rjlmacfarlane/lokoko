@@ -1,13 +1,13 @@
 INSERT INTO users (name, email, province, city, phone_number, profile_picture) VALUES
-('Billy Wu', 'wumbo@gmail.com', 'Ontario', 'Toronto', '4164172638', 'https://i.imgur.com/DD4wbUzs.jpg'),
-('Sara Liu', 'saraliu@gmail.com', 'Ontario', 'Waterloo', '2264917618', 'https://i.imgur.com/DD4wbUzs.jpg'),
-('John Smith', 'johnsmith@gmail.com', 'Ontario', 'Hamilton', '9054917618', 'https://i.imgur.com/DD4wbUzs.jpg'),
-('Luke Berzins', 'getting.a.haircut@thebarbershop.com', 'Ontario', 'Toronto', '4165553890', 'https://i.imgur.com/DD4wbUzs.jpg' ),
-('Elon Musk', 'lets.go@tomars.com', 'Newfoundland and Labrador', 'Paradise', '7099865341', 'https://i.imgur.com/DD4wbUzs.jpg'),
-('Walter White', 'crystal.blue@persuasion.com', 'Alberta', 'Ft. McMurray', '4032394137', 'https://i.imgur.com/DD4wbUzs.jpg'),
-('Saul Goodman', 'youhaverights@bettercallsaul.com', 'British Columbia', 'Vancouver', '6048089812', 'https://i.imgur.com/DD4wbUzs.jpg'),
-('David Bowie', 'floating@tincan.com', 'Manitoba', 'Winnipeg', '2048953890', 'https://i.imgur.com/DD4wbUzs.jpg'),
-('William Riker', 'jonathan.cornflakes@unitedfederation.com', 'Saskatchewan', 'Regina', '3067778303', 'https://i.imgur.com/DD4wbUzs.jpg');
+('Billy Wu', 'wumbo@gmail.com', 'Ontario', 'Toronto', '4164172638', '/img/profile/billy-wu.png'),
+('Sara Liu', 'saraliu@gmail.com', 'Ontario', 'Waterloo', '2264917618', '/img/profile/sara-liu.png'),
+('John Smith', 'johnsmith@gmail.com', 'Ontario', 'Hamilton', '9054917618', '/img/profile/john-smith.png'),
+('Luke Berzins', 'getting.a.haircut@thebarbershop.com', 'Ontario', 'Toronto', '4165553890', '/img/profile/luke-berzins.png' ),
+('Elon Musk', 'lets.go@tomars.com', 'Newfoundland and Labrador', 'Paradise', '7099865341', '/img/profile/elon-musk.png'),
+('Walter White', 'crystal.blue@persuasion.com', 'Alberta', 'Ft. McMurray', '4032394137', '/img/profile/walter-white.png'),
+('Saul Goodman', 'youhaverights@bettercallsaul.com', 'British Columbia', 'Vancouver', '6048089812', '/img/profile/saul-goodman.png'),
+('David Bowie', 'floating@tincan.com', 'Manitoba', 'Winnipeg', '2048953890', '/img/profile/david-bowie.png'),
+('William Riker', 'jonathan.cornflakes@unitedfederation.com', 'Saskatchewan', 'Regina', '3067778303', '/img/profile/william-riker.png');
 
 INSERT INTO listing_categories (name) VALUES
   ('Cars'),
