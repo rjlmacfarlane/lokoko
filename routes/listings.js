@@ -71,7 +71,8 @@ module.exports = (db) => {
     ORDER BY posted_date DESC;`)
       .then(data => {
         const templateVars = {
-          user: userID,
+          user: req.session.user_id,
+          user_id: data.rows[0].user_id,
           listings: data.rows
         };
 

@@ -46,7 +46,7 @@
                 <p>Description: <%= description %>
                 </p>
                 <br>
-                <p>Posted by: <%= user_name %>
+                <p>Posted by: <a href="../users/<%= user_id %>"><%= user_name %></a>
                 </p>
 
                 <form class="contact-seller" method="POST" action="/send">

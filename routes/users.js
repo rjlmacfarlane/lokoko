@@ -6,25 +6,30 @@
  */
 
 const express = require('express');
-const router  = express.Router();
+const listings = require('./listings');
+const router = express.Router();
 
 module.exports = (db) => {
   router.get("/users/:id", (req, res) => {
-    console.log("error here", req.params.id)
+    const userID = req.session.user_id;
+
     db.query(`
     SELECT * FROM users
-    WHERE id = $1
+    LEFT JOIN listings ON users.id = user_id
+    WHERE users.id = $1
     ;`, [req.params.id])
-
       .then(data => {
-        console.log(data.rows[0])
         const templateVars = {
-          user: data.rows[0].id,
+          user: userID,
+          user_id: data.rows[0].user_id,
           name: data.rows[0].name,
           province: data.rows[0].province,
           city: data.rows[0].city,
-          profile_picture: data.rows[0].profile_picture
+          profile_picture: data.rows[0].profile_picture,
+          listings: data.rows,
         };
+
+
         res.render('user', templateVars);
       })
       .catch(err => {
