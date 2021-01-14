@@ -160,6 +160,11 @@ module.exports = (db) => {
 
     const userID = req.session.user_id;
 
+    let userLoggedIn = false;
+    if (req.session.user_id) {
+      userLoggedIn = true;
+    }
+
     // finding if favourite already exists, if found, hide the button
     let foundFavourite = false;
     db.query(`
@@ -210,7 +215,8 @@ module.exports = (db) => {
           user_name: data.rows[0].name,
           sold_date: data.rows[0].sold_date,
           foundFavourite: foundFavourite,
-          belongsToUser: belongsToUser
+          belongsToUser: belongsToUser,
+          userLoggedIn: userLoggedIn
         };
 
         if (req.session.user) {

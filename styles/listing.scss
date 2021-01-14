@@ -14,7 +14,7 @@ body {
 
 .listing_table {
   display: flex;
-  width: 80%;
+  width: 100%;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -26,7 +26,8 @@ body {
 }
 
 .right {
-  padding-left: 4em;
+  padding-left: 8em;
+  width: 100%;
   vertical-align: top;
   font-family: 'Roboto', sans-serif;
 
@@ -65,6 +66,21 @@ body {
 
 .item-sold {
   button {
-    background-color: #fda7a7;
+    background-color: #a50000;
   }
 }
+
+.sold-delete {
+  display: flex;
+  button {
+    margin: 5px;
+    background-color: #a50000;
+  }
+}
+
+a {
+  color: #7ab187;
+  text-decoration: none !important;
+}
+a:hover { color: #69bb8b; }
+a:visited { color: #82d4ad; }
