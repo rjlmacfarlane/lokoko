@@ -23,18 +23,11 @@ A multi-page web app modelled after the Kijiji buy/sell service. This project is
 
 ## Getting Started
 
-1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
-2. Update the .env file with your correct local information 
-  - username: `labber` 
-  - password: `labber` 
-  - database: `midterm`
-3. Install dependencies: `npm i`
-4. Fix to binaries for sass: `npm rebuild node-sass`
-5. Reset database: `npm run db:reset`
-  - Check the db folder to see what gets created and seeded in the SDB
-6. Run the server: `npm run local`
+1. Install dependencies: `npm i`
+2. Build database: `npm run db:reset`
+3. Run the server: `npm run local`
   - Note: nodemon is used, so you should not have to restart your server
-7. Visit `http://localhost:8080/login/1`
+4. Visit `http://localhost:8080/login/1`
 
 ## Tips
 
