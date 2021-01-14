@@ -26,11 +26,10 @@
         <img id="main-photo" src="<%= favourite['main_photo_url'] %>" alt="main-photo" />
       </div>
       <div id="fav-right">
-        <span><%= favourite['title'] %></span>
+        <span id="fav-title"><%= favourite['title'] %></span>
         <span>$<%= favourite['price'] %></span>
       </div>
       <div id="fav-bottom">
-        <span><%= favourite['posted_date'] %></span>
         <button class="fav-remove-button" type="button" value="<%= favourite['id'] %>">Remove</button>
       </div>
     </div>

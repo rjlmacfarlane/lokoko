@@ -64,6 +64,7 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
 
     const userID = req.session.user_id;
+    console.log("USER ID: ", userID)
 
     db.query(`
     SELECT * FROM listings
@@ -71,9 +72,13 @@ module.exports = (db) => {
       .then(data => {
         const templateVars = {
           user: userID,
-          name: req.session.user.name,
           listings: data.rows
         };
+
+        if (req.session.user){
+          templateVars["name"] =  req.session.user.name
+        }
+
         res.render('index', templateVars);
       })
       .catch(err => {
@@ -122,18 +127,22 @@ module.exports = (db) => {
       queryString += whereString;
     }
     // End of query
-    queryString += `ORDER BY posted_date DESC;`;
+    queryString += ` ORDER BY posted_date DESC;`;
+
+console.log(queryString)
 
     db.query(queryString, queryValues)
       .then(data => {
         const templateVars = {
           user: userID,
-          name: req.session.user.name,
           listings: data.rows,
         };
-        // Add seatch string if exists
-        if (req.query.search) {
-          templateVars["search_string"] = req.query.search;
+
+        // Add seatch string or empty
+        templateVars["search_string"] = req.query.search || "";
+
+        if (req.session.user){
+          templateVars["name"] =  req.session.user.name
         }
 
         res.render('listings', templateVars);
@@ -150,6 +159,7 @@ module.exports = (db) => {
 
     const userID = req.session.user_id;
 
+    // finding if favourite already exists, if found, hide the button
     let foundFavourite = false;
     db.query(`
     SELECT * FROM favourite_listings
@@ -164,6 +174,20 @@ module.exports = (db) => {
         res.status(500).redirect('error', err.message);
       });
 
+    // see if session user and listing match, if so show delete button
+    let belongsToUser = false;
+    db.query(`
+    SELECT * FROM listings
+    WHERE id = $1 AND user_id = $2;
+    `, [req.params.id, req.session.user_id])
+      .then(data => {
+        if (data.rows.length > 0) {
+          return belongsToUser = true;
+        }
+      })
+      .catch(err => {
+        res.status(500).redirect('error', err.message);
+      });
 
     db.query(`
     SELECT listings.id AS listing_id, * FROM listings
@@ -171,10 +195,12 @@ module.exports = (db) => {
     WHERE listings.id = $1;
     `, [req.params.id])
       .then(data => {
+      console.log(data.rows[0])
+      console.log("user: ", userID)
         const templateVars = {
           listing_id: data.rows[0].listing_id,
           user: userID,
-          name: req.session.user.name,
+          user_id: data.rows[0].user_id,
           title: data.rows[0].title,
           description: data.rows[0].description,
           cover_photo: data.rows[0].main_photo_url,
@@ -182,8 +208,14 @@ module.exports = (db) => {
           posted_date: moment(data.rows[0].posted_date).fromNow(),
           user_name: data.rows[0].name,
           sold_date: data.rows[0].sold_date,
-          foundFavourite: foundFavourite
+          foundFavourite: foundFavourite,
+          belongsToUser: belongsToUser
         };
+
+        if (req.session.user){
+          templateVars["name"] =  req.session.user.name
+        }
+
         res.render('listing_show', templateVars);
       })
       .catch(err => {
@@ -233,9 +265,12 @@ module.exports = (db) => {
   router.get('/new', (req, res) => {
     const userID = req.session.user_id;
     const templateVars = {
-      user: userID,
-      name: req.session.user.name
+      user: userID
     };
+
+    if (req.session.user){
+      templateVars["name"] =  req.session.user.name
+    }
     res.render('listing_new', templateVars);
   });
 
@@ -293,15 +328,21 @@ module.exports = (db) => {
 
 
   // Delete a listing:
-  router.delete("listings/:id", (req, res) => {
-    db.query(`SELECT * FROM listings;`)                    // Finish: create a query which locates a listing by ID and deletes it from the database
-      .then(
-        res.redirect(`/`)
-      )
+  router.delete("/listings/:id", (req, res) => {
+    const listing_id = req.params.id;
+    const userId = req.session.user_id;
+    const queryString =`
+    DELETE FROM listings
+    WHERE id = $1 AND user_id = $2;
+    `
+    // after listing deleted, go back to home page
+    db.query(queryString, [listing_id, userId])
+      .then(data => {
+        console.log(data)
+        res.status(200).send();
+      })
       .catch(err => {
-        res
-          .status(500)
-          .redirect('error', err.message);
+        res.status(500).send({ error: err.message });
       });
   });
 

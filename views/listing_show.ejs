@@ -18,13 +18,6 @@
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
 
-  <!-- <script>
-    $(document).ready(function () {
-      $(".item-sold").click(function () {
-        alert("item marked as sold");
-      });
-    });
-  </script> -->
 </head>
 
 <body>
@@ -42,40 +35,48 @@
           <img src=" <%= cover_photo %>">
         </th>
         <th class="right">
-           <% if (sold_date) { %>
+          <% if (sold_date) { %>
             <h2>SOLD</h2>
-                <% } else { %>
-                  <h2>$<%= price %>
-                  </h2>
-                  <% } %>
-                    <p>Posted <%= posted_date %>
-                    </p>
-                    <p>Description: <%= description %>
-                    </p>
-                    <br>
-                    <p>Posted by: <%= user_name %>
-                    </p>
+            <% } else { %>
+              <h2>$<%= price %>
+              </h2>
+              <% } %>
+                <p>Posted <%= posted_date %>
+                </p>
+                <p>Description: <%= description %>
+                </p>
+                <br>
+                <p>Posted by: <%= user_name %>
+                </p>
 
-                    <form class="contact-seller" method="POST" action="/send">
-                      <textarea name="contact-seller" class="form-control" placeholder="Write a message to the seller.."></textarea>
-                      <br>
-                      <button type="submit" class="btn btn-outline-light" id="submit">Submit</button>
-                   </form>
+                <form class="contact-seller" method="POST" action="/send">
+                  <textarea name="contact-seller" class="form-control"
+                    placeholder="Write a message to the seller.."></textarea>
+                  <br>
+                  <button type="submit" class="btn btn-outline-light" id="submit">Submit</button>
+                </form>
+                <br>
+                <br>
+                <% if (user==user_id && !sold_date) { %>
+                  <form class="item-sold" method="POST" action="/listings/<%= listing_id %>">
+                    <button class="btn btn-outline-light" type="submit">
+                      Mark item as SOLD
+                    </button>
+                  </form>
+                  <% } %>
                     <br>
-                    <br>
-                    <form class="item-sold" method="POST" action="/listings/<%= listing_id %>">
-                      <button class="btn btn-outline-light" type="submit">
-                        Mark item as SOLD
+                    <% if (foundFavourite===false) { %>
+                      <button type="button" class="input-group-text fav-add-button" value="<%= listing_id %>"
+                        id="basic-addon1">
+                        <i class="far fa-heart fav-class">
+                          Add this to your favourites</i>
                       </button>
-                    </form>
-                    <br>
-                    <% if (foundFavourite === false) { %>
-                    <form class="favourite-listing" value="<%= listing_id %>" action="/favourites" method="POST"></form>
-                    <button type="submit" class="input-group-text fav-add-button btn btn-outline-light" value="<%= listing_id %>" id="basic-addon1">
-                        <i class="far fa-heart fav-class" value="<%= listing_id %>"> Add this to your favourites</i>
-                      </button>
-                    </form>
-                    <% } %>
+                      <% } %>
+                        <% if (belongsToUser) { %>
+                          <button type="button" class="admin-delete-button" value="<%= listing_id %>">
+                            Delete listing
+                          </button>
+                          <% } %>
         </th>
       </thead>
     </table>
@@ -83,9 +84,5 @@
   </div>
 
 </body>
-
-<footer>
-  <%- include('partials/_footer') %>
-</footer>
 
 </html>
