@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/listing-new.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
   <!-- import fonts:  -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
@@ -22,44 +24,35 @@
 <body>
   <br>
   <h2>Post New Listing</h2>
-
+<div class="content">
   <form method="POST" action="/listings">
     <div class="row-spaced">
-      <label for="title">Title</label>
+      <label for="title"><strong>Title</strong></label>
       <input type="text" name="title" class="form-control" placeholder="Enter Title">
     </div>
-
+    <br>
     <div class="row-spaced">
-      <label for="description">Description</label>
+      <label for="description"><strong>Description:</strong></label>
       <textarea type="text" name="description" class="form-control" placeholder="Enter description"></textarea>
     </div>
-
+    <br>
+    <div class="bottom-half">
+    <div class="bottom-left">
     <div class="row-spaced">
-      <label for="thumbnail-photo-url">Thumbnail Photo URL</label>
-      <input id="thumbnail_photo_url" type="text" name="thumbnail_photo_url" class="form-control"
-        placeholder="Enter Thumbnail Photo URL"></textarea>
-    </div>
-
-    <div class="row-spaced">
-      <label for="cover-photo-url">Main Photo URL</label>
-      <input id="main_photo_url" type="text" name="main_photo_url" class="form-control" placeholder="Enter Main Photo URL"></textarea>
-    </div>
-
-    <div class="row-spaced">
-      <label for="price">Price: $</label>
+      <label for="price"><strong>Price ($):</strong></label>
       <input type="number" name="price" class="form-control" id="price" placeholder="Enter Price">
     </div>
-
+    <br>
     <div class="row-spaced">
-      <label for="condition">Condition</label>
+      <label for="condition"><strong>Condition:</strong></label>
       <select name="condition">
         <option value="New">New</option>
         <option value="Used">Used</option>
       </select>
     </div>
-
+    <br>
     <div class="row-spaced">
-      <label for="category_id">Category</label>
+      <label for="category_id"><strong>Category:</strong></label>
       <select name="category_id">
         <option value="1">Cars</option>
         <option value="2">Clothing</option>
@@ -69,22 +62,27 @@
         <option value="6">Other</option>
       </select>
     </div>
-
-    <div class="row-spaced">
-      <label for="file-pic">Choose file to upload</label>
+  </div>
+  <div class="bottom-right">
+    <div class="new-photo">
+      <img src="img/upload-photo.png" id="img-main" width="200" height="200">
+      <br><br>
       <input type="file" id="file-pic" name="file-pic" accept=".jpg, .jpeg, .png">
-      <img src="https://i.imgur.com/AdB9C0p.png" id="img-main" width="200" height="200">
+      <br><br>
+      <label for="cover-photo-url"><strong>or enter a URL:</strong></label>
+      <input id="main_photo_url" type="text" name="main_photo_url" class="form-control" placeholder="Enter URL"></textarea>
     </div>
-
-    <div class="row-spaced">
-      <button type="submit" class="submit-button">Submit New Listing</button>
+  </div>
+</div>
+</div>
+<br>
+<br>
+    <div class="submit animate__animated animate__pulse animate__infinite">
+      <button type="submit" class="btn btn-outline-light" id="submit-button">Submit New Listing</button>
     </div>
   </form>
   <script type="text/javascript" src="./scripts/photo-upload.js"></script>
 </body>
 
-<footer>
-  <%- include('partials/_footer') %>
-</footer>
 
 </html>
