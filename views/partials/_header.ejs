@@ -1,21 +1,25 @@
 <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="/scripts/search.js"></script>
-    <script type="text/javascript" src="/scripts/favourites.js"></script>
-    <script type="text/javascript" src="/scripts/listings-delete.js"></script>
-  </head>
+<html lang="en">
 
-  <body>
+<head>
+  <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="/scripts/search.js"></script>
+  <script type="text/javascript" src="/scripts/favourites.js"></script>
+  <script type="text/javascript" src="/scripts/listings-delete.js"></script>
+</head>
 
+<body>
   <div class="navbar">
-    <span class="animate__animated animate__fadeInDown"><a class="navbar-brand" href="/"><img src="/img/lokoko.png" width="200"></a></span>
+    <span class="animate__animated animate__fadeInDown"><a class="navbar-brand" href="/"><img src="/img/lokoko.png"
+          width="200"></a></span>
     <form class="search-bar" method="GET" action="/listings">
       <input type="text" id="search" name="search" class="form-control" placeholder="Search for something.."
         aria-label="Search" aria-describedby="basic-addon1">
@@ -23,15 +27,6 @@
         <i class="material-icons mdc-button__icon">search</i>
       </button>
     </form>
-
-    <!-- <form class="form-inline" action ="/listings" method="GET">
-
-      <div class="topnav">
-        <input type="text" placeholder="Search..">
-        <button type="submit" class="btn btn-outline-light" style="margin-right: 1em">Search</button>
-      </div>
-    </form> -->
-
     <ul>
       <% if (user && name) { %>
         <li class="nav-item">
@@ -39,18 +34,14 @@
         </li>
         <li class="nav-item">
           <a href="../users/<%= user %>">My Profile</a>
-        </li>
-        <h5> Logged in as:<%= name %>
-        </h5>
-        <% } %>
-
     </ul>
-
-    <form class="form-post-new" action="/new" method="GET">
-      <button type="submit" class="btn btn-outline-light">Post a New Ad</button>
-    </form>
-
-
+    <div>
+      <h6> Welcome, <%= name %>! </h6>
+      <form class="form-post-new" action="/new" method="GET">
+        <button type="submit" class="btn btn-outline-light">Post a New Ad</button>
+      </form>
+    </div>
+    <% } %>
   </div>
 </body>
 
