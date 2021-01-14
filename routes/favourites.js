@@ -1,5 +1,12 @@
 const express = require('express');
 const router  = express.Router();
+const app = express();
+const cookieSession = require('cookie-session');
+
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}));
 
 module.exports = (db) => {
   router.get("/favourites/:id", (req, res) => {
@@ -13,8 +20,14 @@ module.exports = (db) => {
     db.query(queryString, [userId])
       .then(data => {
         const templateVars = {
+          user: req.session.user_id,
           favourites: data.rows
         };
+
+        if (req.session.user){
+          templateVars["name"] =  req.session.user.name
+        }
+
         // Note: id and listing_id of data.rows is identical
         res.render('favourites', templateVars)
       })
