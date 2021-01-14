@@ -195,9 +195,12 @@ console.log(queryString)
     WHERE listings.id = $1;
     `, [req.params.id])
       .then(data => {
+      console.log(data.rows[0])
+      console.log("user: ", userID)
         const templateVars = {
           listing_id: data.rows[0].listing_id,
           user: userID,
+          user_id: data.rows[0].user_id,
           title: data.rows[0].title,
           description: data.rows[0].description,
           cover_photo: data.rows[0].main_photo_url,
