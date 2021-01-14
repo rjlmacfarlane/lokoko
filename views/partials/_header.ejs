@@ -1,21 +1,26 @@
 <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="/scripts/search.js"></script>
-    <script type="text/javascript" src="/scripts/favourites.js"></script>
-  </head>
+<html lang="en">
 
-  <body>
+<head>
+  <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="/scripts/search.js"></script>
+  <script type="text/javascript" src="/scripts/favourites.js"></script>
+</head>
+
+<body>
 
   <div class="navbar">
     <a class="navbar-brand" href="/"><img src="/img/lokoko.png" width="200"></a>
     <form class="search-bar" method="GET" action="/listings">
-      <input type="text" id="search" name="search" class="form-control" placeholder="Search for something.." aria-label="Search" aria-describedby="basic-addon1">
+      <input type="text" id="search" name="search" class="form-control" placeholder="Search for something.."
+        aria-label="Search" aria-describedby="basic-addon1">
       <button type="submit" class="input-group-text" id="basic-addon1">
         <i class="material-icons mdc-button__icon">search</i>
       </button>
@@ -30,23 +35,25 @@
     </form> -->
 
     <ul>
-      <li>
-        <a href="#">My Favourites</a>
-        <li>
-          <a href="#">My Profile</a>
+      <% if (user) { %>
+        <li class="nav-item">
+          <a href="../favourites/<%= user %>">My Favourites</a>
         </li>
-      </li>
+        <li class="nav-item">
+          <a href="../users/<%= user %>">My Profile</a>
+        </li>
+        <h5> Logged in as:<%= name %>
+        </h5>
+        <% } %>
 
     </ul>
 
-     <form class="form-post-new" action="/new" method="GET">
-        <button type="submit" class="btn btn-outline-light">Post a New Ad</button>
-     </form>
+    <form class="form-post-new" action="/new" method="GET">
+      <button type="submit" class="btn btn-outline-light">Post a New Ad</button>
+    </form>
 
 
-    </div>
-  </body>
+  </div>
+</body>
+
 </html>
-
-
-

@@ -8,7 +8,7 @@
 
 const express = require('express');
 const app = express();
-const ENV        = process.env.ENV || "development";
+const ENV = process.env.ENV || "development";
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const nodemailer = require('nodemailer');
@@ -23,7 +23,7 @@ router.use(bodyParser.json());
 
 app.use(cookieSession({
   name: 'session',
-  keys: ['key1', 'key2'],
+  keys: ['key1', 'key2']
 }));
 
 module.exports = (db) => {
@@ -32,11 +32,25 @@ module.exports = (db) => {
   router.get('/login/:id', (req, res) => {
 
     delete req.session.user_id;
+    delete req.session.user;
+
     const userID = req.params.id;
     req.session.user_id = userID;
 
-    res.redirect('/');
 
+    db.query(`
+    SELECT * FROM users
+    WHERE id = $1
+    ;`, [req.params.id])
+      .then(data => {
+        req.session.user = data.rows[0];
+        res.redirect('/');
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .redirect('error', err.message);
+      });
   });
 
   // Logout user session
@@ -44,7 +58,6 @@ module.exports = (db) => {
     delete req.session.user_id;
     res.redirect('/');
   });
-
 
 
   // Get all listings:
@@ -56,9 +69,9 @@ module.exports = (db) => {
     SELECT * FROM listings
     ORDER BY posted_date DESC;`)
       .then(data => {
-        console.log(data.rows);
         const templateVars = {
           user: userID,
+          name: req.session.user.name,
           listings: data.rows
         };
         res.render('index', templateVars);
@@ -115,6 +128,7 @@ module.exports = (db) => {
       .then(data => {
         const templateVars = {
           user: userID,
+          name: req.session.user.name,
           listings: data.rows,
         };
         // Add seatch string if exists
@@ -142,10 +156,10 @@ module.exports = (db) => {
     WHERE listings.id = $1;
     `, [req.params.id])
       .then(data => {
-        console.log("when I click on specificlisting", data.rows[0]);
         const templateVars = {
           listing_id: data.rows[0].listing_id,
           user: userID,
+          name: req.session.user.name,
           title: data.rows[0].title,
           description: data.rows[0].description,
           cover_photo: data.rows[0].main_photo_url,
@@ -186,13 +200,13 @@ module.exports = (db) => {
 
       if (err) {
         console.log(err);
-        res.status(500).send({ message: 'Error! Message not sent!'});
+        res.status(500).send({ message: 'Error! Message not sent!' });
 
       } else {
         console.log(info);
         res
           .render('sent')
-          .status(200).send({ message: 'Message sent!'});
+          .status(200).send({ message: 'Message sent!' });
 
       }
 
@@ -203,9 +217,8 @@ module.exports = (db) => {
   router.get('/new', (req, res) => {
     const userID = req.session.user_id;
     const templateVars = {
-
-      user: userID
-
+      user: userID,
+      name: req.session.user.name
     };
     res.render('listing_new', templateVars);
   });
@@ -227,7 +240,6 @@ module.exports = (db) => {
     db.query(queryString, values)
 
       .then(data => {
-        console.log(data);
         res.redirect(`/listings/${data.rows[0].id}`);
       })
       .catch(err => {
@@ -241,10 +253,7 @@ module.exports = (db) => {
   // Mark a listing as sold
   router.post("/listings/:id", (req, res) => {
 
-
     let listing = req.params;
-
-    console.log(req.params.id);
 
     const queryString = `
     UPDATE listings
@@ -254,13 +263,9 @@ module.exports = (db) => {
     `;
 
     const values = [moment(Date.now()).format(), listing.id];
-    console.log(queryString);
-    console.log(values);
 
     db.query(queryString, values)
-
       .then(data => {
-        console.log(`/listings/${listing.id}`);
         res.redirect(`/listings/${listing.id}`);
       })
       .catch(err => {
