@@ -66,13 +66,20 @@
                   </form>
                   <% } %>
                     <br>
-                    <% if (foundFavourite===false) { %>
+                    <% if (userLoggedIn === true && foundFavourite === false) { %>
                       <button type="button" class="input-group-text fav-add-button" value="<%= listing_id %>"
                         id="basic-addon1">
                         <i class="far fa-heart fav-class">
                           Add this to your favourites</i>
                       </button>
                       <% } %>
+
+                      <% if (userLoggedIn === true && foundFavourite === true) { %>
+                      <div>
+                        <i class="fa fa-heart" style="font-size:20px;color:red;"></i>
+                      </div>
+                      <% } %>
+
                         <% if (belongsToUser) { %>
                           <button type="button" class="admin-delete-button" value="<%= listing_id %>">
                             Delete listing
