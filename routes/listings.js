@@ -64,7 +64,7 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
 
     const userID = req.session.user_id;
-    console.log("USER ID: ", userID)
+    console.log("USER ID: ", userID);
 
     db.query(`
     SELECT * FROM listings
@@ -76,8 +76,8 @@ module.exports = (db) => {
           listings: data.rows
         };
 
-        if (req.session.user){
-          templateVars["name"] =  req.session.user.name
+        if (req.session.user) {
+          templateVars["name"] =  req.session.user.name;
         }
 
         res.render('index', templateVars);
@@ -130,7 +130,7 @@ module.exports = (db) => {
     // End of query
     queryString += ` ORDER BY posted_date DESC;`;
 
-console.log(queryString)
+    console.log(queryString);
 
     db.query(queryString, queryValues)
       .then(data => {
@@ -142,8 +142,8 @@ console.log(queryString)
         // Add seatch string or empty
         templateVars["search_string"] = req.query.search || "";
 
-        if (req.session.user){
-          templateVars["name"] =  req.session.user.name
+        if (req.session.user) {
+          templateVars["name"] =  req.session.user.name;
         }
 
         res.render('listings', templateVars);
@@ -196,8 +196,8 @@ console.log(queryString)
     WHERE listings.id = $1;
     `, [req.params.id])
       .then(data => {
-      console.log(data.rows[0])
-      console.log("user: ", userID)
+        console.log(data.rows[0]);
+        console.log("user: ", userID);
         const templateVars = {
           listing_id: data.rows[0].listing_id,
           user: userID,
@@ -213,8 +213,8 @@ console.log(queryString)
           belongsToUser: belongsToUser
         };
 
-        if (req.session.user){
-          templateVars["name"] =  req.session.user.name
+        if (req.session.user) {
+          templateVars["name"] =  req.session.user.name;
         }
 
         res.render('listing_show', templateVars);
@@ -245,7 +245,7 @@ console.log(queryString)
       text: text
     };
 
-    transporter.sendMail(mailData, function (err, info) {
+    transporter.sendMail(mailData, function(err, info) {
 
       if (err) {
         console.log(err);
@@ -269,8 +269,8 @@ console.log(queryString)
       user: userID
     };
 
-    if (req.session.user){
-      templateVars["name"] =  req.session.user.name
+    if (req.session.user) {
+      templateVars["name"] =  req.session.user.name;
     }
     res.render('listing_new', templateVars);
   });
@@ -332,14 +332,14 @@ console.log(queryString)
   router.delete("/listings/:id", (req, res) => {
     const listing_id = req.params.id;
     const userId = req.session.user_id;
-    const queryString =`
+    const queryString = `
     DELETE FROM listings
     WHERE id = $1 AND user_id = $2;
-    `
+    `;
     // after listing deleted, go back to home page
     db.query(queryString, [listing_id, userId])
       .then(data => {
-        console.log(data)
+        console.log(data);
         res.status(200).send();
       })
       .catch(err => {
