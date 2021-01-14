@@ -21,6 +21,7 @@ $(document).ready(function() {
   }
 
   const addFav = function(listing_id) {
+    console.log(listing_id)
     $.ajax({
       method: 'POST',
       url: `/favourites`,
@@ -56,22 +57,16 @@ $(document).ready(function() {
     deleteFav(event.target.value);
     // deletes html instantly
     favContainer.remove();
-    // load initial favs
     loadFavourites();
   });
 
-  // const addFavButton = $('.fav-add-button');
   // add to favourite
+
   $('.fav-add-button').on('click', function(event) {
-    addFav(event.target.value);
+    console.log(event.currentTarget.value)
+    addFav(event.currentTarget.value);
     // deletes html button
     $(this).remove();
   });
-
-  // $('.fav-class').on('click', function(event) {
-  //   addFav(event.target.value);
-  //   // deletes html button
-  //   $(addFavButton).remove();
-  // });
 
 });

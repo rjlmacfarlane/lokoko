@@ -70,11 +70,15 @@
                     </form>
                     <br>
                     <% if (foundFavourite === false) { %>
-                    <form class="favourite-listing" value="<%= listing_id %>" action="/favourites" method="POST"></form>
-                    <button type="submit" class="input-group-text fav-add-button btn btn-outline-light" value="<%= listing_id %>" id="basic-addon1">
-                        <i class="far fa-heart fav-class" value="<%= listing_id %>"> Add this to your favourites</i>
+                      <button type="button" class="input-group-text fav-add-button" value="<%= listing_id %>" id="basic-addon1">
+                        <i class="far fa-heart fav-class">
+                          Add this to your favourites</i>
                       </button>
-                    </form>
+                    <% } %>
+                    <% if (belongsToUser) { %>
+                    <button type="button" class="admin-delete-button" value="<%= listing_id %>">
+                      Delete listing
+                    </button>
                     <% } %>
         </th>
       </thead>

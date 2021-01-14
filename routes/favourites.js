@@ -13,9 +13,7 @@ module.exports = (db) => {
     db.query(queryString, [userId])
       .then(data => {
         const templateVars = {
-          favourites: data.rows,
-          user: userId,
-          name: req.session.user.name
+          favourites: data.rows
         };
         // Note: id and listing_id of data.rows is identical
         res.render('favourites', templateVars)
