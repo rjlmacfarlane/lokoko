@@ -5,13 +5,12 @@
   color: #FFFFFF;
   display: flex;
   justify-content: space-between;
-  position: fixed;
+  position: fixed !important;
   z-index: 999;
   top: 0;
   left: 0;
   width: 100%;
   font-family: 'Black Han Sans', sans-serif;
-
 }
 
 #post-new {
