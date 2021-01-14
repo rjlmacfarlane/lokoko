@@ -30,37 +30,30 @@
 
 </head>
 
+<div class="content">
 <body>
-  <table class="user-table">
+  <div class="user-table">
+  <table>
+    <div class="user-info">
     <tr>
-      <td>
-        <img src=" <%= profile_picture %>">
+       <td>
+        <h3><%= name %></h3>
+        <p><%= city %>, <%= province %></p><br>
       </td>
     </tr>
-    <tr>
       <td>
-        <h3>
-          <%= name %>
-        </h3>
+       <center> <img id="profile-image" src=" <%= profile_picture %>"></center>
       </td>
-    </tr>
-    <tr>
-      <td>
-        <%= city %>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <%= province %>
-      </td>
-    </tr>
+  </div>
+ </div>
   </table>
 
-  <table class="listings-table">
+  <table>
+    <div class="listings-table">
     <% if (user==user_id) { %>
       <tr>
         <td>
-          <h3>My listings</h3>
+          <h3>My listings</h3><br>
         </td>
       </tr>
 
@@ -93,9 +86,10 @@
                         <a href="listings/<%= listing.id %>"><img src=" <%= listing.thumbnail_photo_url %>" width="80"
                             height="80"></a>
                       </td>
-              </tr>
+                  </tr>
               <% } %>
-                <% } %>
+           <% } %>
+      </div>
   </table>
   </div>
 

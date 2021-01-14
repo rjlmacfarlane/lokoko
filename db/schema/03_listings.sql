@@ -7,7 +7,7 @@ CREATE TABLE listings (
   id SERIAL PRIMARY KEY NOT NULL,
   title VARCHAR(255) NOT NULL,
   description TEXT,
-  thumbnail_photo_url VARCHAR(255) NOT NULL,
+  thumbnail_photo_url VARCHAR(255),
   main_photo_url VARCHAR(255) NOT NULL,
   price INTEGER NOT NULL DEFAULT 0,
   condition condition_list,
