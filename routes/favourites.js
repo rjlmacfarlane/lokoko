@@ -9,9 +9,26 @@ app.use(cookieSession({
 }));
 
 module.exports = (db) => {
+
   // show favourites for specific user
   router.get("/favourites/:id", (req, res) => {
     let userId = req.params.id;
+
+    // select the name of the person's page
+    let userNameFav = "";
+    db.query(`
+    SELECT name FROM users
+    WHERE users.id = $1
+    `, [userId])
+      .then(data => {
+        if (data.rows.length > 0) {
+          return userNameFav = data.rows[0].name;
+        }
+      })
+      .catch(err => {
+        res.status(500).redirect('error', err.message);
+      });
+
     let queryString = `
     SELECT * FROM favourite_listings
     JOIN users ON favourite_listings.user_id = users.id
@@ -22,7 +39,8 @@ module.exports = (db) => {
       .then(data => {
         const templateVars = {
           user: req.session.user_id,
-          favourites: data.rows
+          favourites: data.rows,
+          userNameFav: userNameFav
         };
 
         if (req.session.user){
