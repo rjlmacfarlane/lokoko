@@ -66,7 +66,15 @@ body {
 
 .item-sold {
   button {
-    background-color: #fda7a7;
+    background-color: #a50000;
+  }
+}
+
+.sold-delete {
+  display: flex;
+  button {
+    margin: 5px;
+    background-color: #a50000;
   }
 }
 

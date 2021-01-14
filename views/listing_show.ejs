@@ -58,6 +58,7 @@
                 </form>
                 <br>
                 <br>
+                <div class="sold-delete">
                 <% if (user==user_id && !sold_date) { %>
                   <form class="item-sold" method="POST" action="/listings/<%= listing_id %>">
                     <button class="btn btn-outline-light" type="submit">
@@ -65,7 +66,15 @@
                     </button>
                   </form>
                   <% } %>
+                  <% if (belongsToUser) { %>
                     <br>
+                    <button type="button" class="btn btn-outline-light" value="<%= listing_id %>">
+                      Delete listing
+                    </button>
+                    <% } %>
+                    <br>
+                  </div>
+                  <br>
                     <% if (userLoggedIn === true && foundFavourite === false) { %>
                       <button type="button" class="input-group-text fav-add-button" value="<%= listing_id %>"
                         id="basic-addon1">
@@ -76,15 +85,12 @@
 
                       <% if (userLoggedIn === true && foundFavourite === true) { %>
                       <div>
-                        <i class="fa fa-heart" style="font-size:20px;color:red;"></i>
+                        <i class="fa fa-heart" style="font-size:20px;color:rgb(153, 0, 0);"></i>
+                        <br>
                       </div>
                       <% } %>
 
-                        <% if (belongsToUser) { %>
-                          <button type="button" class="admin-delete-button" value="<%= listing_id %>">
-                            Delete listing
-                          </button>
-                          <% } %>
+
         </th>
       </thead>
     </table>
