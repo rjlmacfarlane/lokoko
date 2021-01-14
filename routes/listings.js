@@ -292,6 +292,7 @@ module.exports = (db) => {
     db.query(queryString, values)
 
       .then(data => {
+        console.log(data)
         res.redirect(`/listings/${data.rows[0].id}`);
       })
       .catch(err => {
@@ -344,24 +345,6 @@ module.exports = (db) => {
       })
       .catch(err => {
         res.status(500).send({ error: err.message });
-      });
-  });
-
-  // Show entire database:
-  router.get("/listings/:id", (req, res) => {
-    db.query(`SELECT * FROM listings;`)                    // (Temporary DEV-only route): create a query which returns the entire database, all tables
-      .then(data => {
-        const templateVars = {
-
-
-
-        };
-        res.render('dev', templateVars);
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .redirect('error', err.message);
       });
   });
 
