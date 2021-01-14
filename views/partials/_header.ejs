@@ -17,28 +17,32 @@
 </head>
 
 <body>
+
   <div class="navbar">
-    <span class="animate__animated animate__fadeInDown"><a class="navbar-brand" href="/"><img src="/img/lokoko.png"
-          width="200"></a></span>
-    <form class="search-bar" method="GET" action="/listings">
+    <a class="navbar-brand" href="/"><img src="/img/lokoko.png" width="200"></a>
+
+    <div class="search-navigation">
+      <form class="search-bar" method="GET" action="/listings">
       <input type="text" id="search" name="search" class="form-control" placeholder="Search for something.."
         aria-label="Search" aria-describedby="basic-addon1">
       <button type="submit" class="input-group-text" id="basic-addon1">
         <i class="material-icons mdc-button__icon">search</i>
       </button>
     </form>
-    <ul>
+    <br>
+    <div class="header-links">
       <% if (user && name) { %>
-        <li class="nav-item">
-          <a href="../favourites/<%= user %>">My Favourites</a>
-        </li>
-        <li class="nav-item">
-          <a href="../users/<%= user %>">My Profile</a>
-    </ul>
+
+          <a class="header-links" href="../favourites/<%= user %>">My Favourites</a>
+
+          <a class="header-links" href="../users/<%= user %>">My Profile</a>
+
+        </div>
+      </div>
     <div>
-      <h6> Welcome, <%= name %>! </h6>
+      <h6><strong>Welcome, <%= name %>! </strong></h6>
       <form class="form-post-new" action="/new" method="GET">
-        <button type="submit" class="btn btn-outline-light">Post a New Ad</button>
+        <button type="submit" class="btn btn-outline-light" id="post-new">Post a New Ad</button>
       </form>
     </div>
     <% } %>

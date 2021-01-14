@@ -24,7 +24,7 @@
 <body>
   <br>
   <h2>Post New Listing</h2>
-<div class="content">
+<div class="content animate__animated animate__fadeIn animate__slow">
   <form method="POST" action="/listings">
     <div class="row-spaced">
       <label for="title"><strong>Title</strong></label>
@@ -45,7 +45,7 @@
     <br>
     <div class="row-spaced">
       <label for="condition"><strong>Condition:</strong></label>
-      <select name="condition">
+      <select name="condition" class="menu">
         <option value="New">New</option>
         <option value="Used">Used</option>
       </select>
@@ -53,7 +53,7 @@
     <br>
     <div class="row-spaced">
       <label for="category_id"><strong>Category:</strong></label>
-      <select name="category_id">
+      <select name="category_id" class="menu">
         <option value="1">Cars</option>
         <option value="2">Clothing</option>
         <option value="3">Electronics</option>
