@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-  <header>
-    <%- include('partials/_header') %>
-  </header>
+<header>
+  <%- include('partials/_header') %>
+</header>
 
 <head>
   <title>
-  	Favourites
+    Favourites
   </title>
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
@@ -17,43 +17,52 @@
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
 </head>
+
 <body>
   <div class="contet">
-  <div class="container-fluid">
-    <div class="px-lg-5">
-      <!-- Banner -->
-      <div class="row py-5">
-        <div class="col-lg-12 mx-auto">
-          <div class="text-white p-5 shadow-sm rounded banner">
-            <h1 class="display-4"><%= favourites[0]['name'] %>'s Favourites Gallery</h1>
-            <p class="lead">Many more items to see!</p>
-            <p class="lead">Keep on favouriting!</p>
-          </div>
-        </div>
-      </div>
-      <!-- End -->
-      <div class="row" id="load-fav-section">
-        <!-- Gallery item -->
-        <% for(let favourite of favourites) {%>
-        <div class="col-xl-3 col-lg-4 col-md-6 mb-4" id="fav-container">
-          <div class="bg-white rounded shadow-sm">
-            <img src="<%= favourite['main_photo_url'] %>" alt="main-photo" class="img-fluid card-img-top">
-            <div class="p-4">
-              <h5> <a href="/listings/<%= favourite['listing_id'] %>" class="text-dark"><%= favourite['title'] %></a></h5>
-              <p class="medium text-muted mb-0"><%= favourite['description'] %></p>
-              <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
-                <button class="fav-remove-button" type="button" value="<%= favourite['id'] %>">Remove</button>
-                <div class="badge badge-danger px-3 rounded-pill font-weight-normal">$<%= favourite['price'] %></div>
-              </div>
+    <div class="container-fluid">
+      <div class="px-lg-5">
+        <!-- Banner -->
+        <div class="row py-5">
+          <div class="col-lg-12 mx-auto">
+            <div class="text-white p-5 shadow-sm rounded banner">
+              <h1 class="display-4">
+                <%= favourites[0]['name'] %>'s Favourites Gallery
+              </h1>
+              <p class="lead">Many more items to see!</p>
+              <p class="lead">Keep on favouriting!</p>
             </div>
           </div>
         </div>
         <!-- End -->
-        <% } %>
+        <div class="row" id="load-fav-section">
+          <!-- Gallery item -->
+          <% for(let favourite of favourites) {%>
+            <div class="col-xl-3 col-lg-4 col-md-6 mb-4" id="fav-container">
+              <div class="bg-white rounded shadow-sm">
+                <img src="<%= favourite['main_photo_url'] %>" alt="main-photo" class="img-fluid card-img-top">
+                <div class="p-4">
+                  <h5> <a href="/listings/<%= favourite['listing_id'] %>" class="text-dark">
+                      <%= favourite['title'] %>
+                    </a></h5>
+                  <p class="medium text-muted mb-0">
+                    <%= favourite['description'] %>
+                  </p>
+                  <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
+                    <button class="fav-remove-button" type="button" value="<%= favourite['id'] %>">Remove</button>
+                    <div class="badge badge-danger px-3 rounded-pill font-weight-normal">$<%= favourite['price'] %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End -->
+            <% } %>
+        </div>
+        <div class="py-5 text-right"><a href="#" class="btn btn-dark px-5 py-3 text-uppercase">Back to top</a></div>
       </div>
-      <div class="py-5 text-right"><a href="#" class="btn btn-dark px-5 py-3 text-uppercase">Back to top</a></div>
     </div>
   </div>
-</div>
 </body>
+
 </html>

@@ -28,8 +28,6 @@ module.exports = (db) => {
           profile_picture: data.rows[0].profile_picture,
           listings: data.rows,
         };
-
-
         res.render('user', templateVars);
       })
       .catch(err => {
