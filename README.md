@@ -1,8 +1,9 @@
-Lokoko Buy/Sell App
+Lokoko 
 =========
 
 ## A Kijiji Clone
 
+A multi-page web app modelled after the Kijiji buy/sell service. This project is a group effort between Irena Podgurski, Simon Huang, and Ryan MacFarlane as part of our week-six (midterm) studies with the Web Development Bootcamp at Lighthouse Labs.
 
 
 ## Features
