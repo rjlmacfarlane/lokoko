@@ -136,6 +136,7 @@ module.exports = (db) => {
 
     const userID = req.session.user_id;
 
+    // finding if favourite already exists, if found, hide the button
     let foundFavourite = false;
     db.query(`
     SELECT * FROM favourite_listings
@@ -144,6 +145,21 @@ module.exports = (db) => {
       .then(data => {
         if (data.rows.length > 0) {
           return foundFavourite = true;
+        }
+      })
+      .catch(err => {
+        res.status(500).redirect('error', err.message);
+      });
+
+    // see if session user and listing match, if so show delete button
+    let belongsToUser = false;
+    db.query(`
+    SELECT * FROM listings
+    WHERE id = $1 AND user_id = $2;
+    `, [req.params.id, req.session.user_id])
+      .then(data => {
+        if (data.rows.length > 0) {
+          return belongsToUser = true;
         }
       })
       .catch(err => {
@@ -168,7 +184,8 @@ module.exports = (db) => {
           posted_date: moment(data.rows[0].posted_date).fromNow(),
           user_name: data.rows[0].name,
           sold_date: data.rows[0].sold_date,
-          foundFavourite: foundFavourite
+          foundFavourite: foundFavourite,
+          belongsToUser: belongsToUser
         };
         res.render('listing_show', templateVars);
       })
@@ -288,15 +305,22 @@ module.exports = (db) => {
 
 
   // Delete a listing:
-  router.delete("listings/:id", (req, res) => {
-    db.query(`SELECT * FROM listings;`)                    // Finish: create a query which locates a listing by ID and deletes it from the database
-      .then(
-        res.redirect(`/`)
-      )
+  router.delete("/listings/:id", (req, res) => {
+    const listing_id = req.params.id;
+    console.log(listing_id);
+    console.log(req.session.user_id)
+    const userId = req.session.user_id;
+    const queryString =`
+    DELETE FROM listings
+    WHERE id = $1 AND user_id = $2;
+    `
+    db.query(queryString, [listing_id, userId])
+      .then(data => {
+        console.log(data)
+        res.status(200).send();
+      })
       .catch(err => {
-        res
-          .status(500)
-          .redirect('error', err.message);
+        res.status(500).send({ error: err.message });
       });
   });
 
