@@ -59,12 +59,14 @@ $(document).ready(function() {
   });
 
   // add to favourite
-
   $('.fav-add-button').on('click', function(event) {
     console.log(event.currentTarget.value)
     addFav(event.currentTarget.value);
-    // deletes html button
-    $(this).remove();
+    let text = $('.fav-add-button span').text();
+    if (text == "Add to Favourites" ){
+       $('.fav-add-button span').text('Added');
+       $('.fav-add-button').addClass('liked');
+       $('.fav-add-button').attr("disabled", true);
+    }
   });
-
 });
