@@ -3,7 +3,9 @@ body {
   background-color: #f0f7f4;
   background-image: url("https://www.transparenttextures.com/patterns/retro-intro.png");
   font-family: 'Black Han Sans', sans-serif;
+  margin-top: 120px;
 }
+
 .row-spaced {
   width: 100%;
 
@@ -34,12 +36,12 @@ body {
 input.form-control:focus {
   border-color: #80b69c;
   box-shadow: 0 0 13px #80b69c;
- }
+}
 
  textarea.form-control:focus {
   border-color: #80b69c;
   box-shadow: 0 0 13px #80b69c;
- }
+}
 
 .submit {
   display: flex;
@@ -60,5 +62,3 @@ h2 {
   display: flex;
   justify-content: center;
 }
-
-
