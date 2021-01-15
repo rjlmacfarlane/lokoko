@@ -36,6 +36,7 @@ module.exports = (db) => {
     WHERE users.id = $1;
     `
     db.query(queryString, [userId])
+
       .then(data => {
         const templateVars = {
           user: req.session.user_id,

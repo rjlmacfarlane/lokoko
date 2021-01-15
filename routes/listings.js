@@ -242,6 +242,7 @@ module.exports = (db) => {
     },
   });
 
+
   router.post('/send', (req, res) => {
     const { text } = req.body;
     const mailData = {
@@ -258,7 +259,7 @@ module.exports = (db) => {
         res.status(500).send({ message: 'Error! Message not sent!' });
 
       } else {
-        console.log(info);
+        //console.log(info);
         res
           .render('sent')
           .status(200).send({ message: 'Message sent!' });
@@ -267,6 +268,8 @@ module.exports = (db) => {
 
     });
   });
+
+
 
   // Post a new listing form:
   router.get('/new', (req, res) => {
